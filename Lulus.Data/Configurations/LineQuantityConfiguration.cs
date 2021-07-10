@@ -20,7 +20,7 @@ namespace Lulus.Data.Configurations
 
             builder.HasOne(x => x.ProductLine).WithMany(x => x.LineQuantities).HasForeignKey(x => x.ProductLine_ID);
 
-            builder.HasOne(x => x.Size).WithMany(x => x.LineQuantities).HasForeignKey(x => x.Size);
+            builder.HasOne(x => x.Size).WithMany(x => x.LineQuantities).HasForeignKey(x => x.Size_ID);
         }
     }
 }

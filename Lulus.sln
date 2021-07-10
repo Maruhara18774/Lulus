@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lulus.Customer", "Lulus.Customer\Lulus.Customer.csproj", "{A1CBD9ED-F19A-41DC-95EE-D008015A099B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.Customer", "Lulus.Customer\Lulus.Customer.csproj", "{A1CBD9ED-F19A-41DC-95EE-D008015A099B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lulus.Data", "Lulus.Data\Lulus.Data.csproj", "{CAE01CAA-FC12-4646-88CD-4D3CDA60A033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.Data", "Lulus.Data\Lulus.Data.csproj", "{CAE01CAA-FC12-4646-88CD-4D3CDA60A033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lulus.BAL", "Lulus.BAL\Lulus.BAL.csproj", "{CB56B205-A856-47A6-A327-25F4005CF96E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.BAL", "Lulus.BAL\Lulus.BAL.csproj", "{CB56B205-A856-47A6-A327-25F4005CF96E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

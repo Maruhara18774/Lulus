@@ -15,11 +15,13 @@ namespace Lulus.Data.Entities
 
         public double Order_Total { get; set; }
 
-        public int User_ID { get; set; }
+        public string User_ID { get; set; }
 
         public OrderStatus Status { get; set; }
 
         public virtual List<OrderDetail> OrderDetails { get; set; }
+
+        public virtual User User { get; set; }
 
 
     }

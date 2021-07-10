@@ -18,6 +18,8 @@ namespace Lulus.Data.Configurations
             builder.HasKey(x => x.Feedback_ID);
 
             builder.HasOne(x => x.Product).WithMany(x => x.Feedbacks).HasForeignKey(x => x.Product_ID);
+
+            builder.HasOne(x => x.User).WithMany(x => x.Feedbacks).HasForeignKey(x => x.User_ID);
         }
     }
 }

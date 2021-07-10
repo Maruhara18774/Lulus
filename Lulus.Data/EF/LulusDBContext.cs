@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lulus.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lulus.Data.EF
 {
-    class LulusDBContext : DbContext
+    public class LulusDBContext : IdentityDbContext<User>
     {
         public LulusDBContext(DbContextOptions options) : base(options)
         {
@@ -30,7 +32,12 @@ namespace Lulus.Data.EF
             modelBuilder.ApplyConfiguration(new ProductLineConfiguration());
             modelBuilder.ApplyConfiguration(new SizeConfiguration());
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens").HasKey(x => x.UserId);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -40,6 +47,9 @@ namespace Lulus.Data.EF
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductLine> ProductLines { get; set; }
         public DbSet<Size> Sizes { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
     }
 }

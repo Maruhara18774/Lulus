@@ -18,6 +18,8 @@ namespace Lulus.Data.Configurations
 
             builder.HasKey(x => x.Order_ID);
             builder.Property(x => x.Status).HasDefaultValue(OrderStatus.New);
+
+            builder.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.User_ID);
         }
     }
 }

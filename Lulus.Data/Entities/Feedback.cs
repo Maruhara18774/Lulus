@@ -16,11 +16,13 @@ namespace Lulus.Data.Entities
 
         public string Feedback_Content { get; set; }
 
-        public int User_ID { get; set; }
+        public string User_ID { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public int Product_ID { get; set; }
 
         public virtual Product Product { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
