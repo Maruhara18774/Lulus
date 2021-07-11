@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.Catalog.Products.DTOs.Manage
+namespace Lulus.BAL.Catalog.Products.DTOs
 {
     public class PagedResult<T>: PagedResultBase
     {

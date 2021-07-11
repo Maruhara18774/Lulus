@@ -50,7 +50,7 @@ namespace Lulus.BAL.Catalog.Products
             throw new NotImplementedException();
         }
 
-        public async Task<PagedViewModel<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<DTOs.PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
         {
             var query = from p in _context.Products
                         join sc in _context.SubCategories on p.SubCategory_ID equals sc.SubCategory_ID
@@ -71,19 +71,37 @@ namespace Lulus.BAL.Catalog.Products
                     Status = p.Status
                 }).ToListAsync();
 
-            var pagedResult = new DTOs.Manage.PagedResult<ProductViewModel>()
+            var pagedResult = new DTOs.PagedResult<ProductViewModel>()
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,
                 Items = data,
             };
-        
+            return pagedResult;
         }
 
-        public Task<int> Update(ProductUpdateRequest request)
+        public async Task<int> Update(ProductUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(request.Id);
+            product.Product_Name = request.Name;
+            product.Product_Price = request.Price;
+            product.Product_SalePrice = request.SalePrice;
+            product.Product_Description = request.Description;
+            product.SubCategory_ID = request.SubCategoryID;
+            product.Status = request.Status;
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdatePrice(UpdatePriceRequest request)
+        {
+            var product = await _context.Products.FindAsync(request.ProductID);
+
+            if (product == null) return false;
+            product.Product_Price = request.OriginalPrice;
+            product.Product_SalePrice = request.SalePrice;
+            return await _context.SaveChangesAsync() > 0;
+
         }
     }
 }

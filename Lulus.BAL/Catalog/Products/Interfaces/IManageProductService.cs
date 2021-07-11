@@ -1,4 +1,5 @@
 ﻿
+using Lulus.BAL.Catalog.Products.DTOs;
 using Lulus.BAL.Catalog.Products.DTOs.Manage;
 using Lulus.BAL.DTOs;
 using System;
@@ -15,10 +16,12 @@ namespace Lulus.BAL.Catalog.Products.Interfaces
 
         Task<int> Update(ProductUpdateRequest request);
 
+        Task<bool> UpdatePrice(UpdatePriceRequest request);
+
         Task<int> Delete(int productID);
 
         Task<List<ProductViewModel>> GetAll();
 
-        Task<PagedViewModel<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
     }
 }

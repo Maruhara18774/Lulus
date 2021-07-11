@@ -11,7 +11,6 @@ namespace Lulus.BAL.Catalog.Products.Interfaces
 {
     public interface IProductService
     {
-
-        Task<PagedViewModel<ProductViewModel>> GetAllBySubCateID(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllBySubCateID(GetProductPagingRequest request);
     }
 }
