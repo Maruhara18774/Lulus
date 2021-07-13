@@ -12,6 +12,7 @@ using Lulus.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Lulus.BAL.Catalog.Categories;
 using Lulus.BAL.Catalog.Categories.Interfaces;
+using Microsoft.OpenApi.Models;
 
 namespace Lulus.BackendApi
 {
@@ -34,6 +35,10 @@ namespace Lulus.BackendApi
             services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Lulus", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +61,12 @@ namespace Lulus.BackendApi
 
             app.UseAuthorization();
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Lulus V1");
+                });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

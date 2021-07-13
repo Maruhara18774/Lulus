@@ -12,7 +12,7 @@ namespace Lulus.BackendApi.Controllers
     public class ProductController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             return Ok("This is result!");
         }
