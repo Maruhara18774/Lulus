@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lulus.BAL\Lulus.BAL.csproj" />
+    <ProjectReference Include="..\Lulus.Data\Lulus.Data.csproj" />
+  </ItemGroup>
+
+</Project>
