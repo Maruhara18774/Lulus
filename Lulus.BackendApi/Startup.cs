@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Lulus.BAL.Catalog.Categories;
 using Lulus.BAL.Catalog.Categories.Interfaces;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using Lulus.Data.Entities;
 
 namespace Lulus.BackendApi
 {
@@ -33,6 +35,9 @@ namespace Lulus.BackendApi
             );
             // Declare DI
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<UserManager<User>,UserManager<User>>();
+            services.AddTransient<SignInManager<User>, SignInManager<User>>();
+
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
