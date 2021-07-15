@@ -18,25 +18,31 @@ export class App extends Component {
       logged: false
     }
   }
-  callbackLogin=()=>{
-    this.setState({logged:true});
+  callbackLogin = () => {
+    this.setState({ logged: true });
+  }
+  callbackLogout = () => {
+    this.setState({ logged: false });
   }
   render() {
     return (
       <div className="App">
         {this.state.logged ?
           <Router>
-            <div className="navbar">
-              <Navbar />
+            <div style={{width:window.innerWidth-20,height:window.innerHeight-5}}>
+              <div className="navbar">
+                <Navbar callback={this.callbackLogout} />
+              </div>
+              <div className="content">
+                <Switch>
+                  <Route path="/" component={Home} />
+                  <Route path="**" component={PageNotFound} />
+                </Switch>
+              </div>
             </div>
-            <div className="content">
-              <Switch>
-                <Route path="/" component={Home} />
-                <Route path="**" component={PageNotFound} />
-              </Switch>
-            </div>
+
           </Router> :
-          <LoginForm callback={this.callbackLogin}/>
+          <LoginForm callback={this.callbackLogin} />
         }
       </div>
     )

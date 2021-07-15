@@ -32,7 +32,7 @@ export class LoginForm extends Component {
                         name="username"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
-                        <Input />
+                        <Input className="custom-input"/>
                     </Form.Item>
 
                     <Form.Item
@@ -40,7 +40,7 @@ export class LoginForm extends Component {
                         name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input.Password />
+                        <Input.Password className="custom-input" />
                     </Form.Item>
 
                     <Form.Item name="remember" valuePropName="checked">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';
+import { Menu, Button } from 'antd';
+import { AppstoreOutlined, DoubleRightOutlined, DoubleLeftOutlined,LineChartOutlined,UserOutlined } from '@ant-design/icons';
 import logoUrl from '../../Assets/logo/logo.png';
 
 const { SubMenu } = Menu;
@@ -18,6 +18,9 @@ export class Navbar extends Component {
         const currentState = this.state.minimize;
         await this.setState({ minimize: !currentState });
     }
+    logout = () => {
+        this.props.callback();
+    }
     render() {
         if(!this.state.minimize){
             return (
@@ -27,29 +30,28 @@ export class Navbar extends Component {
                     mode="inline"
                 >
                     <img src={logoUrl} alt="Lulus Logo" height="50" className="header-logo"/>
-                    <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-                        <Menu.ItemGroup key="g1" title="Item 1">
-                            <Menu.Item key="1">Option 1</Menu.Item>
-                            <Menu.Item key="2">Option 2</Menu.Item>
+                    <Button danger className="header-logout" onClick={()=>this.logout()}>Logout</Button>
+                    <SubMenu key="common" icon={<AppstoreOutlined />} title="General management">
+                        <Menu.ItemGroup key="category" title="Categories">
+                            <Menu.Item key="listCategory">List categories</Menu.Item>
+                            <Menu.Item key="createCategory">Create new category</Menu.Item>
                         </Menu.ItemGroup>
-                        <Menu.ItemGroup key="g2" title="Item 2">
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
+                        <Menu.ItemGroup key="product" title="Products">
+                            <Menu.Item key="listProduct">List products</Menu.Item>
+                            <Menu.Item key="createProduct">Create new product</Menu.Item>
                         </Menu.ItemGroup>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-                        <Menu.Item key="5">Option 5</Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-                        <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                        </SubMenu>
+                    <SubMenu key="user" icon={<UserOutlined />} title="User">
+                        <Menu.ItemGroup key="customer" title="Customers">
+                            <Menu.Item key="listCustomer">List customers</Menu.Item>
+                        </Menu.ItemGroup>
+                        <Menu.ItemGroup key="admin" title="Moderators">
+                            <Menu.Item key="listAdmin">List accounts</Menu.Item>
+                            <Menu.Item key="createAdmin">Create new account</Menu.Item>
+                        </Menu.ItemGroup>
                     </SubMenu>
-                    <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-                        <Menu.Item key="9">Option 9</Menu.Item>
-                        <Menu.Item key="10">Option 10</Menu.Item>
-                        <Menu.Item key="11">Option 11</Menu.Item>
-                        <Menu.Item key="12">Option 12</Menu.Item>
+                    <SubMenu key="report" icon={<LineChartOutlined />} title="Report">
+                        <Menu.Item key="statistic">Statistic</Menu.Item>
                     </SubMenu>
                     <p onClick={()=>this.changeMinimize()} className="header-button"><DoubleLeftOutlined/> Thu nhỏ </p>
                 </Menu>
@@ -65,29 +67,27 @@ export class Navbar extends Component {
                     <div style= {{marginTop:"20px", marginLeft:"40%"}}>
                         <DoubleRightOutlined onClick={()=>this.changeMinimize()}/>
                     </div>
-                    <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-                        <Menu.ItemGroup key="g1" title="Item 1">
-                            <Menu.Item key="1">Option 1</Menu.Item>
-                            <Menu.Item key="2">Option 2</Menu.Item>
+                    <SubMenu key="common" icon={<AppstoreOutlined />} title="General management">
+                        <Menu.ItemGroup key="category">
+                            <Menu.Item key="listCategory">List categories</Menu.Item>
+                            <Menu.Item key="createCategory">Create new category</Menu.Item>
                         </Menu.ItemGroup>
-                        <Menu.ItemGroup key="g2" title="Item 2">
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
+                        <Menu.ItemGroup key="product">
+                            <Menu.Item key="listProduct">List products</Menu.Item>
+                            <Menu.Item key="createProduct">Create new product</Menu.Item>
                         </Menu.ItemGroup>
                     </SubMenu>
-                    <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-                        <Menu.Item key="5">Option 5</Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-                        <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                        </SubMenu>
+                    <SubMenu key="user" icon={<UserOutlined />} title="User">
+                        <Menu.ItemGroup key="customer">
+                            <Menu.Item key="listCustomer">List customers</Menu.Item>
+                        </Menu.ItemGroup>
+                        <Menu.ItemGroup key="admin">
+                            <Menu.Item key="listAdmin">List accounts</Menu.Item>
+                            <Menu.Item key="createAdmin">Create new account</Menu.Item>
+                        </Menu.ItemGroup>
                     </SubMenu>
-                    <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-                        <Menu.Item key="9">Option 9</Menu.Item>
-                        <Menu.Item key="10">Option 10</Menu.Item>
-                        <Menu.Item key="11">Option 11</Menu.Item>
-                        <Menu.Item key="12">Option 12</Menu.Item>
+                    <SubMenu key="report" icon={<LineChartOutlined />} title="Report">
+                        <Menu.Item key="statistic">Statistic</Menu.Item>
                     </SubMenu>
                 </Menu>
             )
