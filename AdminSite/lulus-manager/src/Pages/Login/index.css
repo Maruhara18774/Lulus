@@ -1,0 +1,9 @@
+#form-wrap{
+    border-style: solid;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: 35%;
+    margin-top: 5%;
+    padding: 30px;
+    background: url("http://www.pngmagic.com/product_images/sky-blue-hd-background-image-for-banner.jpg");
+}
