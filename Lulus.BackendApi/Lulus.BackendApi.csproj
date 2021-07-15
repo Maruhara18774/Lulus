@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lulus.BAL\Lulus.BAL.csproj" />
     <ProjectReference Include="..\Lulus.Data\Lulus.Data.csproj" />
+    <ProjectReference Include="..\Lulus.ViewModels\Lulus.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

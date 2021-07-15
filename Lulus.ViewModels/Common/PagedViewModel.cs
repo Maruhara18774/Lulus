@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.DTOs
+namespace Lulus.ViewModels.Common
 {
     public class PagedViewModel<T>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.Catalog.Categories.DTOs
+namespace Lulus.ViewModels.Categories
 {
     public class CategoryViewModel
     {

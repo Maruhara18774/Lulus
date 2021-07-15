@@ -1,4 +1,5 @@
-﻿using Lulus.BAL.Catalog.Users.DTOs;
+﻿
+using Lulus.ViewModels.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Lulus.BAL.Catalog.Users.Interfaces
     {
         Task<string> Login(LoginRequest request);
 
-        Task<string> Register(RegisterRequest request);
+        Task<bool> Register(RegisterRequest request);
     }
 }

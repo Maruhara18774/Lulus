@@ -1,6 +1,7 @@
-﻿using Lulus.BAL.Catalog.Users.DTOs;
+﻿
 using Lulus.BAL.Catalog.Users.Interfaces;
 using Lulus.Data.Entities;
+using Lulus.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +56,20 @@ namespace Lulus.BAL.Catalog.Users
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            throw new NotImplementedException();
+            var user = new User()
+            {
+                UserName = request.Username,
+                Email = request.Email,
+                Customer_FirstName = request.FirstName,
+                Customer_LastName = request.LastName,
+
+            };
+            var result = await _userManager.CreateAsync(user, request.Password);
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

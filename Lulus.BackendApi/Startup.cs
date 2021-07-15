@@ -15,6 +15,8 @@ using Lulus.BAL.Catalog.Categories.Interfaces;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Lulus.Data.Entities;
+using Lulus.BAL.Catalog.Users.Interfaces;
+using Lulus.BAL.Catalog.Users;
 
 namespace Lulus.BackendApi
 {
@@ -33,10 +35,14 @@ namespace Lulus.BackendApi
             services.AddDbContext<LulusDBContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("LulusDatabase"))
             );
+            services.AddIdentity<User,IdentityRole>()
+                .AddEntityFrameworkStores<LulusDBContext>()
+                .AddDefaultTokenProviders();
             // Declare DI
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<UserManager<User>,UserManager<User>>();
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
+            services.AddTransient<IUserService, UserService>();
 
 
             services.AddControllersWithViews();

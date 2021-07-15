@@ -1,7 +1,6 @@
 ﻿
-using Lulus.BAL.Catalog.Products.DTOs;
-using Lulus.BAL.Catalog.Products.DTOs.Manage;
-using Lulus.BAL.DTOs;
+using Lulus.ViewModels.Products;
+using Lulus.ViewModels.Products.Manage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

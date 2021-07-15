@@ -1,14 +1,15 @@
-﻿using Lulus.BAL.DTOs;
+﻿
+using Lulus.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.Catalog.Products.DTOs.Public
+namespace Lulus.ViewModels.Products.Manage
 {
     public class GetProductPagingRequest: PagingRequestBase
     {
-        public int SubCateId { get; set; }
+        public string Keyword { get; set; }
     }
 }

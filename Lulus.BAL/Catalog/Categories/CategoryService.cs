@@ -1,6 +1,7 @@
-﻿using Lulus.BAL.Catalog.Categories.DTOs;
+﻿
 using Lulus.BAL.Catalog.Categories.Interfaces;
 using Lulus.Data.EF;
+using Lulus.ViewModels.Categories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

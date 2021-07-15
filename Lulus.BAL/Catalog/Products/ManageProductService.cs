@@ -1,11 +1,10 @@
 ﻿
-using Lulus.BAL.Catalog.Products.DTOs;
-using Lulus.BAL.Catalog.Products.DTOs.Manage;
 using Lulus.BAL.Catalog.Products.Interfaces;
-using Lulus.BAL.DTOs;
 using Lulus.Data.EF;
 using Lulus.Data.Entities;
 using Lulus.Data.Enums;
+using Lulus.ViewModels.Products;
+using Lulus.ViewModels.Products.Manage;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace Lulus.BAL.Catalog.Products
             throw new NotImplementedException();
         }
 
-        public async Task<DTOs.PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<ViewModels.Products.PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
         {
             var query = from p in _context.Products
                         join sc in _context.SubCategories on p.SubCategory_ID equals sc.SubCategory_ID
@@ -71,7 +70,7 @@ namespace Lulus.BAL.Catalog.Products
                     Status = p.Status
                 }).ToListAsync();
 
-            var pagedResult = new DTOs.PagedResult<ProductViewModel>()
+            var pagedResult = new ViewModels.Products.PagedResult<ProductViewModel>()
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,

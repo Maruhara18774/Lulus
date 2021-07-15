@@ -1,9 +1,8 @@
 ﻿
 using Lulus.BAL.Catalog.Products.DTOs;
-using Lulus.BAL.Catalog.Products.DTOs.Manage;
 using Lulus.BAL.Catalog.Products.Interfaces;
-using Lulus.BAL.DTOs;
 using Lulus.Data.EF;
+using Lulus.ViewModels.Products;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,7 +40,7 @@ namespace Lulus.BAL.Catalog.Products
                     Status = p.Status
                 }).ToListAsync();
 
-            var pagedResult = new DTOs.PagedResult<ProductViewModel>()
+            var pagedResult = new PagedResult<ProductViewModel>()
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,

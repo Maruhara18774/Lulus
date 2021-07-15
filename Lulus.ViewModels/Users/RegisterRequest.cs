@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.Catalog.Users.DTOs
+namespace Lulus.ViewModels.Users
 {
-    public class LoginRequest
+    public class RegisterRequest
     {
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-
-        public bool RememberMe { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }    
     }
 }

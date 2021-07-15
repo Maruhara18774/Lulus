@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lulus.BAL.Catalog.Products.DTOs.Manage
+namespace Lulus.ViewModels.Products.Manage
 {
     public class UpdatePriceRequest
     {
