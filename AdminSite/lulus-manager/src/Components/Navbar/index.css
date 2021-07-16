@@ -3,14 +3,5 @@
     margin-right: 20%;
     margin-top: 20px;
     margin-bottom: 10px;
-}
-.header-button{
     cursor: pointer;
-    text-align: center;
-    margin-top: 10px;
-    justify-content: end;
-}
-.header-logout{
-    margin-left: 30%;
-    margin-top: 5px;
 }
