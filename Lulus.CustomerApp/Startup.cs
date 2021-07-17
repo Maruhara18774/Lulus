@@ -1,5 +1,6 @@
 using Lulus.CustomerApp.Services;
 using Lulus.CustomerApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,12 @@ namespace Lulus.CustomerApp
             services.AddControllersWithViews();
             services.AddHttpClient();
             services.AddTransient<IUserApi, UserApi>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/User/LoginStrict";
+                    options.AccessDeniedPath = "/User/Forbidden/";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,7 @@ namespace Lulus.CustomerApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

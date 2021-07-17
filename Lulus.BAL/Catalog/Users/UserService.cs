@@ -37,6 +37,7 @@ namespace Lulus.BAL.Catalog.Users
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
             {
+                new Claim(ClaimTypes.PrimarySid, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.Customer_FirstName),
                 new Claim(ClaimTypes.Name, user.Customer_LastName),
