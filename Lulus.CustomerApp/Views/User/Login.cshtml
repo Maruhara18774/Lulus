@@ -1,0 +1,30 @@
+﻿@using Lulus.ViewModels.Users
+@model LoginRequest
+
+<div class="btn-group">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-user-circle"></i>
+    </a>
+    <div class="dropdown-menu">
+        <form class="px-4 py-3" asp-action="Login" asp-controller="User" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username ..." asp-for="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password ..." asp-for="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check" asp-for="RememberMe">
+                <label class="form-check-label" for="check">
+                    Remember me
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">New around here? Sign up</a>
+        <a class="dropdown-item" href="#">Forgot password?</a>
+    </div>
+</div>

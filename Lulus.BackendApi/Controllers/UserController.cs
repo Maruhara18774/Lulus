@@ -37,7 +37,7 @@ namespace Lulus.BackendApi.Controllers
             {
                 return BadRequest("Login failed.");
             }
-            return Ok(new { token= resultToken  });
+            return Ok(resultToken);
         }
 
         [HttpPost("Register")]

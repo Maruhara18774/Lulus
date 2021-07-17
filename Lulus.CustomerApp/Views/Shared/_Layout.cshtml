@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cute Dresses, Tops, Shoes, Jewelry & Clothing for Women | Lulus</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <style>
+        .subNav li {
+            font-size: medium;
+            padding-left: 16px;
+            padding-right: 16px;
+            font-family: cursive;
+        }
+
+        .footer-table td {
+            vertical-align: top
+        }
+
+        .footer-table ul {
+            list-style: none;
+            padding: 0
+        }
+
+        .footer-table li {
+            margin-bottom: 10px
+        }
+
+        .footer-table {
+            width: 100%
+        }
+
+            .footer-table a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .footer-table .icon-map a {
+                margin-left: 9%;
+                font-size: 20px
+            }
+
+                .footer-table .icon-map a:hover {
+                    color: lightpink;
+                }
+
+            .footer-table ul li a:hover {
+                color: bisque;
+                text-decoration: underline
+            }
+
+            .footer-table .footer-end a {
+                margin-left: 1%
+            }
+
+                .footer-table .footer-end a:hover {
+                    text-decoration: underline
+                }
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="/Main/Homepage/Index" style="padding-left:45%;">
+                    <img src="~/Images/Homepage/logo2.jpg" />
+                </a>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @*<li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>*@
+                    </ul>
+                    <partial name="~/Views/User/Login.cshtml" />
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" id="navbar_top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav subNav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Main/Category/Index/New">NEW</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">BESTSELLERS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">DRESSES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Main/Category/Index/Clothing">CLOTHING</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">SWIM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">SHOES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">EXTRAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">SALE</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div style="margin-bottom:100px">
+        @RenderBody()
+    </div>
+    <div class="container" style="padding:0;width:100%;margin:0">
+        <main role="main">
+
+        </main>
+    </div>
+
+    <footer class="border-top" style="padding:40px 15% 40px 15%;">
+        <table class="footer-table">
+            <tr>
+                <td>
+                    <h4>Get rewarded just for shopping!</h4>
+                    <p>Start by signing up for emails and get 15% off any order.</p>
+                    <div class="input-group" style="width:70%;margin-bottom:20px">
+                        <input type="text" class="form-control" placeholder="Enter email for newsletter signup">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">SEND</button>
+                        </div>
+                    </div>
+                    <p class="icon-map">
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </p>
+                </td>
+                <td>
+                    <h6>Quick Links</h6>
+                    <ul>
+                        <li>
+                            <a href="#">View Account</a>
+                        </li>
+                        <li>
+                            <a href="#">Track Your Order</a>
+                        </li>
+                        <li>
+                            <a href="#">Initiate a Return</a>
+                        </li>
+                        <li>
+                            <a href="#">Gift Cards</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <h6>Customer Care</h6>
+                    <ul>
+                        <li>
+                            <a href="#">Customer Service</a>
+                        </li>
+                        <li>
+                            <a href="#">Guest Order Lookup</a>
+                        </li>
+                        <li>
+                            <a href="#">Return/Exchange Policy</a>
+                        </li>
+                        <li>
+                            <a href="#">International Orders</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact Us</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <h6>Services</h6>
+                    <ul>
+                        <li>
+                            <a href="#">Mobile App</a>
+                        </li>
+                        <li>
+                            <a href="#">Student Discount</a>
+                        </li>
+                        <li>
+                            <a href="#">Bridal Concierge</a>
+                        </li>
+                        <li>
+                            <a href="#">Give $20, Get $20</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <h6>About</h6>
+                    <ul>
+                        <li>
+                            <a href="#">Our Story</a>
+                        </li>
+                        <li>
+                            <a href="#">Careers</a>
+                        </li>
+                        <li>
+                            <a href="#">Our Blog</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <p class="footer-end">
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Accessibility</a>
+                        <a href="#">Site Map</a>
+                        <a href="#">© 2021 Lulus.com</a>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                document.getElementById('navbar_top').classList.add('fixed-top');
+                document.getElementById('navbar_top').classList.remove('bg-white');
+                document.getElementById('navbar_top').classList.add('bg-light');
+                // add padding top to show content behind navbar
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+            } else {
+                document.getElementById('navbar_top').classList.remove('fixed-top');
+                document.getElementById('navbar_top').classList.remove('bg-light');
+                document.getElementById('navbar_top').classList.add('bg-white');
+                // remove padding top from body
+                document.body.style.paddingTop = '0';
+            }
+        });
+    });
+</script>
