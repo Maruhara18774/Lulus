@@ -8,6 +8,6 @@ namespace Lulus.CustomerApp.Services.Interfaces
 {
     public interface IUserApi
     {
-        Task<string> Login(LoginRequest request);
+        public Task<string> Login(LoginRequest request);
     }
 }

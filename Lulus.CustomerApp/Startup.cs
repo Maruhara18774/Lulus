@@ -29,6 +29,7 @@ namespace Lulus.CustomerApp
             services.AddControllersWithViews();
             services.AddHttpClient();
             services.AddTransient<IUserApi, UserApi>();
+            services.AddTransient<ISubCategoryApi, SubCategoryApi>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

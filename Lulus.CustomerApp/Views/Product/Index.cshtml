@@ -1,0 +1,7 @@
+﻿@model Lulus.CustomerApp.Models.Products.ProductCategoryModel
+<h2>This is list products of @ViewBag.Key</h2>
+@foreach (var subCate in Model.ListSubCategories)
+{
+    <partial name="~/Views/SubCategory/GetSubCate.cshtml" model="subCate" />
+    <br/>
+}

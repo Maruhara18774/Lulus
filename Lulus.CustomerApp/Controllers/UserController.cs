@@ -38,9 +38,6 @@ namespace Lulus.CustomerApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            if (!ModelState.IsValid)
-                return View("CustomError");
-
             var token = await _userApi.Login(request);
             var userPrinciple = ValidateToken(token);
             var authProperties = new AuthenticationProperties
