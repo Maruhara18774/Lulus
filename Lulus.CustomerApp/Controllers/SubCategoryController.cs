@@ -23,10 +23,5 @@ namespace Lulus.CustomerApp.Controllers
             string key = RouteData.Values["id"].ToString();
             return View();
         }
-        [HttpGet]
-        public IActionResult GetSubCate()
-        {
-            return PartialView();
-        }
     }
 }

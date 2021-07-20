@@ -1,7 +1,31 @@
 ﻿@model Lulus.CustomerApp.Models.Products.ProductCategoryModel
 <h2>This is list products of @ViewBag.Key</h2>
+@{
+    bool subcateChecked = false;
+    if (Model.ListSubCategories.Where(x => x.Checked == true) != null)
+    { subcateChecked = true; }
+}
 @foreach (var subCate in Model.ListSubCategories)
 {
-    <partial name="~/Views/SubCategory/GetSubCate.cshtml" model="subCate" />
-    <br/>
+    <a asp-action="SortBySubCate" asp-controller="Product" asp-route-id="@subCate.ID">
+        <span>
+            @if (!subcateChecked)
+            {
+                <input type="checkbox" />
+            }
+            else
+            {
+                if (subCate.Checked == true)
+                {
+                    <input type="checkbox" checked />
+                }
+                else
+                {
+                    <input type="checkbox" disabled />
+                }
+            }
+
+        </span>
+        @subCate.Name
+    </a>
 }

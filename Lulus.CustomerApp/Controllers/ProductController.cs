@@ -31,5 +31,9 @@ namespace Lulus.CustomerApp.Controllers
             model.ListSubCategories = cateList;
             return View(model);
         }
+        public async Task<IActionResult> SortBySubCate()
+        {
+
+        }
     }
 }

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Lulus.ViewModels\Lulus.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\SubCategory\" />
+  </ItemGroup>
+
 </Project>
