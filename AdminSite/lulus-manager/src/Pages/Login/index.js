@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import { Form, Input, Button, Checkbox, Typography  } from 'antd';
+import {Post} from '../../HttpHelper/HttpHelper';
 const {Title} = Typography;
 
 
@@ -13,8 +14,22 @@ export class LoginForm extends Component {
         }
     }
 
-    submitHandler = (value) => {
-        this.props.callback();
+    submitHandler = async (value) => {
+        const data ={
+            username: value.username,
+            password: value.password,
+            rememberMe: value.remember
+        }
+        Post('/User/AdminLogin',data).then(
+            response=>{
+                if(response.ok){
+                    this.props.callback();
+                }
+                else{
+                    alert("Wrong login info.")
+                }
+            }
+        )
     }
     render() {
         return (

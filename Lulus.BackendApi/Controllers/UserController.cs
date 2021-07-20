@@ -55,5 +55,24 @@ namespace Lulus.BackendApi.Controllers
             }
             return Ok("Registed.");
         }
+        [HttpPost("AdminLogin")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AdminLogin([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var resultToken = await _userService.AdminLogin(request);
+            if (resultToken == "Wrong username" || resultToken == "Wrong password")
+            {
+                return BadRequest(resultToken);
+            }
+            if (string.IsNullOrEmpty(resultToken))
+            {
+                return BadRequest("Login failed.");
+            }
+            return Ok(resultToken);
+        }
     }
 }

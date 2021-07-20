@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Lulus.BAL.Catalog.Products.DTOs.Public;
+using Lulus.BAL.Catalog.Products.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,14 +9,20 @@ using System.Threading.Tasks;
 
 namespace Lulus.BackendApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
-            return Ok("This is result!");
+            _productService = productService;
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetByCateID(GetProductPagingRequest request)
+        {
+            var result = await _productService.GetAllByCateID(request);
+            return Ok(result);
         }
     }
 }

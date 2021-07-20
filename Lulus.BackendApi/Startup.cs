@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Lulus.BAL.Catalog.SubCategories.Interfaces;
 using Lulus.BAL.Catalog.SubCategories;
+using Lulus.BAL.Catalog.Products;
+using Lulus.BAL.Catalog.Products.Interfaces;
 
 namespace Lulus.BackendApi
 {
@@ -48,6 +50,7 @@ namespace Lulus.BackendApi
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISubCategoryService, SubCategoryService>();
+            services.AddTransient<IProductService, ProductService>();
 
 
             services.AddControllers();

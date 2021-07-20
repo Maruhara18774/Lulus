@@ -1,4 +1,5 @@
-﻿using Lulus.ViewModels.SubCategories;
+﻿using Lulus.ViewModels.Products;
+using Lulus.ViewModels.SubCategories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Lulus.CustomerApp.Models.Products
     public class ProductCategoryModel
     {
         public List<SubCateViewModel> ListSubCategories { get; set; } = new List<SubCateViewModel>();
+        public List<ProductViewModel> ListProducts { get; set; } = new List<ProductViewModel>();
     }
 }

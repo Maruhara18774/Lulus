@@ -9,6 +9,6 @@ namespace Lulus.BAL.Catalog.Products.DTOs.Public
 {
     public class GetProductPagingRequest: PagingRequestBase
     {
-        public int SubCateId { get; set; }
+        public int ID { get; set; }
     }
 }
