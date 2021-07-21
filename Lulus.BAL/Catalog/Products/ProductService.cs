@@ -3,6 +3,8 @@ using Lulus.BAL.Catalog.Products.DTOs;
 using Lulus.BAL.Catalog.Products.DTOs.Public;
 using Lulus.BAL.Catalog.Products.Interfaces;
 using Lulus.Data.EF;
+using Lulus.ViewModels.ProductImages;
+using Lulus.ViewModels.ProductLines;
 using Lulus.ViewModels.Products;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,9 +28,8 @@ namespace Lulus.BAL.Catalog.Products
         {
             var query = from p in _context.Products
                         join sc in _context.SubCategories on p.SubCategory_ID equals sc.SubCategory_ID
-                        where sc.Category_ID == request.ID
+                        where sc.Category_ID == request.ID 
                         select p;
-
             int totalRow = await query.CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
@@ -42,7 +43,33 @@ namespace Lulus.BAL.Catalog.Products
                     SubCategory_ID = p.SubCategory_ID,
                     Status = p.Status
                 }).ToListAsync();
-
+            foreach(var item in data)
+            {
+                var productLines = from pl in _context.ProductLines
+                                   where pl.Product_ID == item.ID
+                                   select pl;
+                item.ListProductLines = await productLines.Select(p => new ProductLineViewModel()
+                {
+                    ID = p.ProductLine_ID,
+                    Texture_Name = p.Texture_Name,
+                    Texture_Image_Url = p.Texture_Image,
+                    CreatedDate = p.ProductLine_CreatedDate,
+                    UpdatedDate = p.ProductLine_UpdatedDate,
+                    Product_ID = p.Product_ID
+                }).ToListAsync();
+                foreach(var line in item.ListProductLines)
+                {
+                    var productImages = from i in _context.ProductImages
+                                        where i.ProductLine_ID == line.ID
+                                        select i;
+                    line.ListImages = await productImages.Select(i => new ProductImageViewModel()
+                    {
+                        ID = i.ProductImage_ID,
+                        Image_Url = i.ProductImage_Image,
+                        ProductLine_ID = i.ProductLine_ID
+                    }).ToListAsync();
+                }
+            }
             return data;
         }
 

@@ -51,6 +51,10 @@
                     {
                         <p>@item.Name</p>
                         <p>@item.Price</p>
+                        @foreach(var line in item.ListProductLines)
+                {
+                    <img src ="@line.Texture_Image_Image" alt="line-image"/>
+                }
                         <hr/>
                     }
                 </div>

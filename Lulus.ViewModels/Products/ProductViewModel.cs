@@ -1,5 +1,6 @@
 ﻿
 using Lulus.Data.Enums;
+using Lulus.ViewModels.ProductLines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,6 @@ namespace Lulus.ViewModels.Products
         public int SubCategory_ID { get; set; }
 
         public ProductStatus Status { get; set; }
+        public List<ProductLineViewModel> ListProductLines { get; set; }
     }
 }
