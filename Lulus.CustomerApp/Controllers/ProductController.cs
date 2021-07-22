@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lulus.CustomerApp.Models.Products;
 using Lulus.BAL.Catalog.Products.DTOs.Public;
+using Lulus.ViewModels.Products;
 
 namespace Lulus.CustomerApp.Controllers
 {
@@ -24,18 +25,23 @@ namespace Lulus.CustomerApp.Controllers
         }
         public async Task<IActionResult> Index(int id, int key, int page)
         {
+            // Get list sub categories
             ViewBag.Key = id;
-            var requestCate = new GetAllSubCategoriesByCategoryIDRequest();
-            requestCate.CategoryID = id;
-            var cateList = await _subCategoryApi.GetList(requestCate);
+            var cateList = await _subCategoryApi.GetList(new GetAllSubCategoriesByCategoryIDRequest(id));
 
-            var requestProduct = new GetProductPagingRequest();
+            // Get list products
+            var product = new List<ProductViewModel>();
             if (page == 0) page = 1;
-            requestProduct.PageIndex = page;
-            requestProduct.PageSize = 10;
-            requestProduct.ID = id;
-            var product = await _productApi.GetListByCateID(requestProduct);
+            if(key == 0)
+            {
+                product = await _productApi.GetListByCateID(new GetProductPagingRequest(id, page, 10));
+            }
+            else
+            {
+                product = await _productApi.GetListBySubCateID(new GetProductPagingRequest(key, page, 10));
+            }
 
+            // Create a view model
             var model = new ProductCategoryModel();
             model.ListSubCategories = cateList;
             var cateSelected = model.ListSubCategories.Find(x => x.ID == key);
@@ -44,11 +50,28 @@ namespace Lulus.CustomerApp.Controllers
                 cateSelected.Checked = true;
             }
             model.ListProducts = product;
-            return View(model);
+            foreach (var p in product)
+            {
+                foreach(var line in p.ListProductLines)
+                {
+                    foreach(var size in line.ListSizes)
+                    {
+                        if(model.ListSizes.Find(x=> x.ID == size.ID) == null)
+                        {
+                            model.ListSizes.Add(size);
+                        }
+                    }
+                }
+            }
+                return View(model);
         }
         public IActionResult FullList(int id)
         {
             return RedirectToAction("Index", new { id = id });
+        }
+        public IActionResult Details(int id)
+        {
+            return View();
         }
     }
 }

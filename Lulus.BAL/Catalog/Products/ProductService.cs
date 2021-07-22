@@ -6,6 +6,7 @@ using Lulus.Data.EF;
 using Lulus.ViewModels.ProductImages;
 using Lulus.ViewModels.ProductLines;
 using Lulus.ViewModels.Products;
+using Lulus.ViewModels.Sizes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -68,12 +69,21 @@ namespace Lulus.BAL.Catalog.Products
                         Image_Url = i.ProductImage_Image,
                         ProductLine_ID = i.ProductLine_ID
                     }).ToListAsync();
+                    var productSizes = from s in _context.Sizes
+                                       join q in _context.LineQuantities on s.Size_ID equals q.Size_ID
+                                       where q.ProductLine_ID == line.ID
+                                       select s;
+                    line.ListSizes = await productSizes.Select(s => new SizeViewModel()
+                    {
+                        ID = s.Size_ID,
+                        Key = s.Size_Key
+                    }).ToListAsync();
                 }
             }
             return data;
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllBySubCateID(DTOs.Public.GetProductPagingRequest request)
+        public async Task<List<ProductViewModel>> GetAllBySubCateID(DTOs.Public.GetProductPagingRequest request)
         {
             var query = from p in _context.Products
                         where p.SubCategory_ID == request.ID
@@ -92,15 +102,43 @@ namespace Lulus.BAL.Catalog.Products
                     SubCategory_ID = p.SubCategory_ID,
                     Status = p.Status
                 }).ToListAsync();
-
-            var pagedResult = new PagedResult<ProductViewModel>()
+            foreach (var item in data)
             {
-                TotalRecords = totalRow,
-                PageIndex = request.PageIndex,
-                PageSize = request.PageSize,
-                Items = data,
-            };
-            return pagedResult;
+                var productLines = from pl in _context.ProductLines
+                                   where pl.Product_ID == item.ID
+                                   select pl;
+                item.ListProductLines = await productLines.Select(p => new ProductLineViewModel()
+                {
+                    ID = p.ProductLine_ID,
+                    Texture_Name = p.Texture_Name,
+                    Texture_Image_Url = p.Texture_Image,
+                    CreatedDate = p.ProductLine_CreatedDate,
+                    UpdatedDate = p.ProductLine_UpdatedDate,
+                    Product_ID = p.Product_ID
+                }).ToListAsync();
+                foreach (var line in item.ListProductLines)
+                {
+                    var productImages = from i in _context.ProductImages
+                                        where i.ProductLine_ID == line.ID
+                                        select i;
+                    line.ListImages = await productImages.Select(i => new ProductImageViewModel()
+                    {
+                        ID = i.ProductImage_ID,
+                        Image_Url = i.ProductImage_Image,
+                        ProductLine_ID = i.ProductLine_ID
+                    }).ToListAsync();
+                    var productSizes = from s in _context.Sizes
+                                       join q in _context.LineQuantities on s.Size_ID equals q.Size_ID
+                                       where q.ProductLine_ID == line.ID
+                                       select s;
+                    line.ListSizes = await productSizes.Select(s => new SizeViewModel()
+                    {
+                        ID = s.Size_ID,
+                        Key = s.Size_Key
+                    }).ToListAsync();
+                }
+            }
+            return data;
         }
     }
 }

@@ -32,12 +32,23 @@ namespace Lulus.BackendApi.Controllers
                     {
                         image.Image_Url = "https://localhost:44354" + image.Image_Url;
                     }
-                    //var imageFileStream = System.IO.File.OpenRead(line.Texture_Image_Url);
-                    //line.Texture_Image_Image =  new FormFile(imageFileStream,0,imageFileStream.Length,null,line.Texture_Image_Url)
-                    //{
-                    //    Headers = new HeaderDictionary(),
-                    //    ContentType = "image/jpeg"
-                    //};
+                }
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetBySubCateID(GetProductPagingRequest request)
+        {
+            var result = await _productService.GetAllBySubCateID(request);
+            foreach (var product in result)
+            {
+                foreach (var line in product.ListProductLines)
+                {
+                    line.Texture_Image_Url = "https://localhost:44354" + line.Texture_Image_Url;
+                    foreach (var image in line.ListImages)
+                    {
+                        image.Image_Url = "https://localhost:44354" + image.Image_Url;
+                    }
                 }
             }
             return Ok(result);

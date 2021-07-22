@@ -1,4 +1,5 @@
 ﻿using Lulus.ViewModels.ProductImages;
+using Lulus.ViewModels.Sizes;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,6 @@ namespace Lulus.ViewModels.ProductLines
 
         public int Product_ID { get; set; }
         public List<ProductImageViewModel> ListImages { get; set; }
+        public List<SizeViewModel> ListSizes { get; set; }
     }
 }

@@ -34,5 +34,21 @@ namespace Lulus.CustomerApp.Services
 
             return new List<ProductViewModel>();
         }
+        public async Task<List<ProductViewModel>> GetListBySubCateID(GetProductPagingRequest request)
+        {
+            var json = JsonConvert.SerializeObject(request);
+            var httpcontent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://localhost:44354");
+            var respond = await client.PostAsync("/api/Product/GetBySubCateID", httpcontent);
+            var body = await respond.Content.ReadAsStringAsync();
+            if (respond.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<ProductViewModel>>(body);
+            }
+
+            return new List<ProductViewModel>();
+        }
     }
 }

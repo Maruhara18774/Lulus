@@ -2,7 +2,7 @@
 
 <style>
     .sort-bar {
-        width: 300px;
+        max-width: 300px;
         padding-left: 10%;
         padding-right: 10%;
         vertical-align: text-top
@@ -16,15 +16,83 @@
     .content {
         top: 0;
     }
-    .content__textureimage{
-        border-radius:50px;
-        cursor:pointer;
+
+    .content__textureimage {
+        border-radius: 50px;
+        cursor: pointer;
+        margin-top: 10px;
+        border-style: solid;
+        border-color: gainsboro;
+        border-width: 2px
     }
-    .content__productimage{
-        width:100%
+
+    .content__productimage {
+        width: 100%
+    }
+
+    .mytable {
+    }
+
+        .mytable td {
+            vertical-align: top;
+            padding-top: 20px;
+        }
+    .content__price {
+        font-size: large;
+        padding-left: 10px
+    }
+
+    .content__more {
+        margin-left: 45%;
+        text-decoration: none;
+        color: orange;
+    }
+
+        .content__more :hover {
+            color: aqua;
+            text-decoration: none
+        }
+
+    .thumbnail {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .thumbnail__image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .thumbnail__content {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+        .thumbnail__content a {
+            text-decoration: none;
+            color: dimgray;
+            font-size: large
+        }
+
+    .thumbnail:hover .thumbnail__image {
+        opacity: 0.3;
+    }
+
+    .thumbnail:hover .thumbnail__content {
+        opacity: 1;
     }
 </style>
-<table style="width: 100%">
+<table style="width: 100%" class="mytable">
     <tr>
         <td>
             <div class="sort-bar">
@@ -32,7 +100,38 @@
                 <br />
                 <h4>Size</h4>
                 <hr />
+                @foreach (var size in Model.ListSizes)
+                {
+                    <p>
+                        <span><input type="checkbox" /></span>
+                        @size.Key
+                    </p>
+                    <br />
+                }
                 <h4>Price</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="min" style="text-align:center; width:100%">Min</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" id="min">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="max" style="text-align:center; width:100%"> Max</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" id="max">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Sort</button>
+                    </div>
+                </form>
                 <hr />
                 <h4>Category</h4>
                 @foreach (var subCate in Model.ListSubCategories)
@@ -40,8 +139,8 @@
 
                     if (subCate.Checked)
                     {
-                        <a asp-action="FullList" asp-controller="Product" asp-route-id="@ViewBag.Key">
-                            *@subCate.Name
+                        <a asp-action="FullList" asp-controller="Product" asp-route-id="@ViewBag.Key" style="color:chocolate">
+                            @subCate.Name
                         </a>
                     }
                     else
@@ -56,35 +155,73 @@
         </td>
         <td>
             <div class="content">
-                <h2>This is list products of @ViewBag.Key</h2>
-                <div class="container">
-                    <div class="row">
-                        @foreach (var product in Model.ListProducts)
-                        {
-                        <div class="col-md-3">
-                            @foreach (var line in product.ListProductLines)
+                @if (Model.ListProducts.Count == 0)
+                {
+                    <p style="text-align:center;width:600px">Empty</p>
+                }
+                else
+                {
+                    <div class="container">
+                        <div class="row">
+                            @foreach (var product in Model.ListProducts)
                             {
-                                @foreach (var image in line.ListImages)
-                                {
-                                    <img src="@image.Image_Url" class="content__productimage" id="presentImage+@product.ID"/>
-                                    break;
-                                }
-                                break;
-                            }
+                                <div class="col-md-3">
+                                    @foreach (var line in product.ListProductLines)
+                                    {
+                                        @foreach (var image in line.ListImages)
+                                        {
+                                            <div class="thumbnail">
+                                                <img src="@image.Image_Url" class="content__productimage thumbnail__image" id="presentImage+@product.ID" />
+                                                <div class="thumbnail__content">
+                                                    <a asp-action="Details" asp-controller="Product" asp-id="@product.ID">View more</a>
+                                                </div>
+                                            </div>
+                                            break;
+                                        }
+                                        break;
+                                    }
+                                    @{
+                                        int lineCount = 0;
+                                        foreach (var line in product.ListProductLines)
+                                        {
 
-                            @foreach (var line in product.ListProductLines)
-                            {
-                                <img src="@line.Texture_Image_Url" alt="line-image" class="content__textureimage" onclick="ChangeImage(@line.ListImages[0].Image_Url,@product.ID)"/>
+
+                                            if (lineCount < 6)
+                                            {
+                                                <img src="@line.Texture_Image_Url" alt="line-image" class="content__textureimage" onclick="ChangeImage(@line.ListImages[0].Image_Url,@product.ID)" />
+                                                lineCount++;
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    <table>
+                                        <tr>
+                                            <td><p>@product.Name</p></td>
+                                            <td>
+                                                @if (product.SalePrice != product.Price)
+                                                {
+                                                    <p class="content__price"><span style="text-decoration:line-through;font-size:small">$@product.Price</span> $@product.SalePrice</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="content__price">$@product.SalePrice</p>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             }
-                            <p>@product.Name</p>
-                            <p>@product.Price</p>
                         </div>
-                        }
+
+
+                        <a href="#" class="content__more">View more ...</a>
                     </div>
-                    
+                }
 
-
-                </div>
 
             </div>
         </td>
@@ -92,6 +229,7 @@
 </table>
 <script>
     function ChangeImage(url, id) {
-        document.getElementById("presentImage" + id).src = url;    }
+        document.getElementById("presentImage" + id).src = url;
+    }
 </script>
 

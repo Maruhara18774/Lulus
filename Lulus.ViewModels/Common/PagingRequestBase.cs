@@ -11,5 +11,14 @@ namespace Lulus.ViewModels.Common
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }
+        public PagingRequestBase()
+        {
+
+        }
+        public PagingRequestBase(int pIndex, int pSize)
+        {
+            this.PageIndex = pIndex;
+            this.PageSize = pSize;
+        }
     }
 }

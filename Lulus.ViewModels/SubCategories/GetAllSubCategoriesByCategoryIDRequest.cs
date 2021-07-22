@@ -9,5 +9,10 @@ namespace Lulus.ViewModels.SubCategories
     public class GetAllSubCategoriesByCategoryIDRequest
     {
         public int CategoryID { get; set; }
+        public GetAllSubCategoriesByCategoryIDRequest() { }
+        public GetAllSubCategoriesByCategoryIDRequest(int id)
+        {
+            this.CategoryID = id;
+        }
     }
 }

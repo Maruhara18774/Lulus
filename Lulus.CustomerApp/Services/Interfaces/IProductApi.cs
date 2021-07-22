@@ -10,5 +10,6 @@ namespace Lulus.CustomerApp.Services.Interfaces
     public interface IProductApi
     {
         Task<List<ProductViewModel>> GetListByCateID(GetProductPagingRequest request);
+        Task<List<ProductViewModel>> GetListBySubCateID(GetProductPagingRequest request);
     }
 }

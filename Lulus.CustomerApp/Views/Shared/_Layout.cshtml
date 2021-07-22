@@ -64,7 +64,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white">
             <div class="container">
-                <a class="navbar-brand" href="/Main/Homepage/Index" style="padding-left:45%;">
+                <a class="navbar-brand" style="padding-left:45%;" asp-action="Index" asp-controller="Home">
                     <img src="~/Images/Homepage/logo2.jpg" />
                 </a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -100,13 +100,13 @@
                         <a class="nav-link" href="#">BESTSELLERS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">DRESSES</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Product" asp-route-id="1">DRESSES</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-action="Index" asp-controller="Category" asp-route-id="Clothing">CLOTHING</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">SWIM</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Product" asp-route-id="5">SWIM</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">SHOES</a>
