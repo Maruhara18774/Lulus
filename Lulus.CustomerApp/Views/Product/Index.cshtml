@@ -1,65 +1,97 @@
 ﻿@model Lulus.CustomerApp.Models.Products.ProductCategoryModel
 
-    <style>
-        .sort-bar {
-            width: 100%;
-            padding-left:10%;
-            padding-right:10%
-        }
-        .sort-bar a{
-            text-decoration:none;
-            color:black;
-        }
-        .content{
-            top: 0;
-        }
-    </style>
-    <table style="width: 100%">
-        <tr>
-            <td>
-                <div class="sort-bar">
-                    <h3>Refine By</h3>
-                    <br/>
-                    <h4>Size</h4>
-                    <hr/>
-                    <h4>Price</h4>
-                    <hr/>
-                    <h4>Category</h4>
-                    @foreach (var subCate in Model.ListSubCategories)
-                    {
+<style>
+    .sort-bar {
+        width: 300px;
+        padding-left: 10%;
+        padding-right: 10%;
+        vertical-align: text-top
+    }
 
-                        if (subCate.Checked)
-                        {
-                            <a asp-action="FullList" asp-controller="Product" asp-route-id="@ViewBag.Key">
-                                *@subCate.Name
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-action="Index" asp-controller="Product" asp-route-id="@ViewBag.Key" asp-route-key="@subCate.ID">
-                                @subCate.Name
-                            </a>
-                        }
-                        <br />
-                    }
-                </div>
-            </td>
-            <td>
-                <div class="content">
-                    <h2>This is list products of @ViewBag.Key</h2>
-                    @foreach (var item in Model.ListProducts)
-                    {
-                        <p>@item.Name</p>
-                        <p>@item.Price</p>
-                        @foreach(var line in item.ListProductLines)
+        .sort-bar a {
+            text-decoration: none;
+            color: black;
+        }
+
+    .content {
+        top: 0;
+    }
+    .content__textureimage{
+        border-radius:50px;
+        cursor:pointer;
+    }
+    .content__productimage{
+        width:100%
+    }
+</style>
+<table style="width: 100%">
+    <tr>
+        <td>
+            <div class="sort-bar">
+                <h3>Refine By</h3>
+                <br />
+                <h4>Size</h4>
+                <hr />
+                <h4>Price</h4>
+                <hr />
+                <h4>Category</h4>
+                @foreach (var subCate in Model.ListSubCategories)
                 {
-                    <img src ="@line.Texture_Image_Image" alt="line-image"/>
-                }
-                        <hr/>
+
+                    if (subCate.Checked)
+                    {
+                        <a asp-action="FullList" asp-controller="Product" asp-route-id="@ViewBag.Key">
+                            *@subCate.Name
+                        </a>
                     }
+                    else
+                    {
+                        <a asp-action="Index" asp-controller="Product" asp-route-id="@ViewBag.Key" asp-route-key="@subCate.ID">
+                            @subCate.Name
+                        </a>
+                    }
+                    <br />
+                }
+            </div>
+        </td>
+        <td>
+            <div class="content">
+                <h2>This is list products of @ViewBag.Key</h2>
+                <div class="container">
+                    <div class="row">
+                        @foreach (var product in Model.ListProducts)
+                        {
+                        <div class="col-md-3">
+                            @foreach (var line in product.ListProductLines)
+                            {
+                                @foreach (var image in line.ListImages)
+                                {
+                                    <img src="@image.Image_Url" class="content__productimage" id="presentImage+@product.ID"/>
+                                    break;
+                                }
+                                break;
+                            }
+
+                            @foreach (var line in product.ListProductLines)
+                            {
+                                <img src="@line.Texture_Image_Url" alt="line-image" class="content__textureimage" onclick="ChangeImage(@line.ListImages[0].Image_Url,@product.ID)"/>
+                            }
+                            <p>@product.Name</p>
+                            <p>@product.Price</p>
+                        </div>
+                        }
+                    </div>
+                    
+
+
                 </div>
-            </td>
-        </tr>
-    </table>
-    
+
+            </div>
+        </td>
+    </tr>
+</table>
+<script>
+    function ChangeImage(url, id) {
+        document.getElementById("presentImage" + id).src = url;    }
+</script>
 
