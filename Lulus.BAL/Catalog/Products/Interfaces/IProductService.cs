@@ -12,5 +12,7 @@ namespace Lulus.BAL.Catalog.Products.Interfaces
     {
         Task<List<ProductViewModel>> GetAllByCateID(GetProductPagingRequest request);
         Task<List<ProductViewModel>> GetAllBySubCateID(GetProductPagingRequest request);
+
+        Task<ProductViewModel> GetDetailByID(GetProductDetailRequest request);
     }
 }

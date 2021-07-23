@@ -11,5 +11,6 @@ namespace Lulus.CustomerApp.Services.Interfaces
     {
         Task<List<ProductViewModel>> GetListByCateID(GetProductPagingRequest request);
         Task<List<ProductViewModel>> GetListBySubCateID(GetProductPagingRequest request);
+        Task<ProductViewModel> GetDetailByID(GetProductDetailRequest request);
     }
 }

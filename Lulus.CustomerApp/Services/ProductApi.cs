@@ -50,5 +50,21 @@ namespace Lulus.CustomerApp.Services
 
             return new List<ProductViewModel>();
         }
+        public async Task<ProductViewModel> GetDetailByID(GetProductDetailRequest request)
+        {
+            var json = JsonConvert.SerializeObject(request);
+            var httpcontent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://localhost:44354");
+            var respond = await client.PostAsync("/api/Product/GetDetailByID", httpcontent);
+            var body = await respond.Content.ReadAsStringAsync();
+            if (respond.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ProductViewModel>(body);
+            }
+
+            return new ProductViewModel();
+        }
     }
 }

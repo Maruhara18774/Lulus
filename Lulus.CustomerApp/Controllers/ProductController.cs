@@ -69,9 +69,21 @@ namespace Lulus.CustomerApp.Controllers
         {
             return RedirectToAction("Index", new { id = id });
         }
-        public IActionResult Details(int id)
+        [HttpGet]
+        public IActionResult Sort(List<ProductViewModel> model)
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Sort(SortModel model)
+        {
+            return PartialView();
+        }
+        public async Task<IActionResult> Details(int id, int line)
+        {
+            var detail = await _productApi.GetDetailByID(new GetProductDetailRequest(id));
+            if (line == 0) line = 1;
+            return View(detail);
         }
     }
 }
