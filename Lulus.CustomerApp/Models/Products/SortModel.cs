@@ -9,5 +9,12 @@ namespace Lulus.CustomerApp.Models.Products
     {
         public double Min { get; set; }
         public double Max { get; set; }
+        public int CategoryID { get; set; }
+        public int SubcategoryID { get; set; }
+        public SortModel() { }
+        public SortModel(int cateID, int subcateID) {
+            this.CategoryID = cateID;
+            this.SubcategoryID = subcateID;
+        }
     }
 }

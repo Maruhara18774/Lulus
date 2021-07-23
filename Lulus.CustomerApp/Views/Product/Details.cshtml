@@ -1,1 +1,79 @@
-﻿@model Lulus.ViewModels.Products.ProductViewModel
+﻿@model Lulus.CustomerApp.Models.Products.DetailProductModel
+<div class="container" style="margin-top:20px">
+    <div class="row">
+        <div class="col-md-1">
+            @{ var currentLine = Model.ListProductLines.Where(x => x.ID == Model.CurrentLine).FirstOrDefault(); }
+            @foreach (var image in currentLine.ListImages)
+            {
+                <img src="@image.Image_Url" alt="sub-image" style="width:50px; margin-bottom:20px" />
+            }
+        </div>
+        <div class="col-md-4">
+            <img src="@currentLine.ListImages[0].Image_Url" style="width:100%" />
+            <div style="display:inline-block">
+                <a href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-pinterest-p"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <hr />
+            <p>
+                <span style="font-size:large">#LOVELULUS</span>
+                Tag your photos on Instagram for a chance to WIN $250!
+            </p>
+        </div>
+        <div class="col-md-7">
+            <h3>@Model.Name</h3>
+            <p>Lulus | (@Model.ListFeedbacks.Count)</p>
+            @if (Model.SalePrice != Model.Price)
+            {
+                <h3><span style="text-decoration:line-through">$@Model.Price</span> $@Model.SalePrice</h3>
+            }
+            else
+            {
+                <h3>$@Model.Price</h3>
+            }
+            <div>
+                <div style="display:inline-block">
+                    @foreach (var line in Model.ListProductLines)
+                    {
+                        <p>@line.Texture_Name</p>
+                        <img src="@line.Texture_Image_Url" alt="Texture image" />
+                    }
+                </div>
+                <p>Size sold out? <a href="#">Join the Waitlist</a></p>
+                <div style="display:inline-block">
+                    @foreach (var size in currentLine.ListSizes)
+                    {
+                        <p>@size.Key</p>
+                    }
+                </div>
+                <p>
+                    <a>Size Chart</a>
+                    |
+                    <b>Fit Note: Fit is true to size.</b>
+                </p>
+                <button>ADD TO BAG</button>
+                <p>Free International Shipping on orders over $150 with code WorldWide! <a>See More</a></p>
+            </div>
+            <h3>Description</h3>
+            <hr />
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
+<div>
+    <h3>Customer review</h3>
+    <button>Back to top</button>
+</div>

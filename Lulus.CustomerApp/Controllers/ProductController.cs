@@ -23,10 +23,10 @@ namespace Lulus.CustomerApp.Controllers
             _configuration = configuration;
             _productApi = productApi;
         }
-        public async Task<IActionResult> Index(int id, int key, int page)
+        public async Task<IActionResult> Index(int id, int key, int page, float min, float max)
         {
             // Get list sub categories
-            ViewBag.Key = id;
+            ViewBag.CateID = id;
             var cateList = await _subCategoryApi.GetList(new GetAllSubCategoriesByCategoryIDRequest(id));
 
             // Get list products
@@ -40,7 +40,7 @@ namespace Lulus.CustomerApp.Controllers
             {
                 product = await _productApi.GetListBySubCateID(new GetProductPagingRequest(key, page, 10));
             }
-
+            ViewBag.SubcateID = key;
             // Create a view model
             var model = new ProductCategoryModel();
             model.ListSubCategories = cateList;
@@ -50,6 +50,10 @@ namespace Lulus.CustomerApp.Controllers
                 cateSelected.Checked = true;
             }
             model.ListProducts = product;
+            if(min != 0 && max != 0)
+            {
+                model.ListProducts = model.ListProducts.Where(x => x.SalePrice >= min && x.SalePrice <= max).ToList();
+            }
             foreach (var p in product)
             {
                 foreach(var line in p.ListProductLines)
@@ -69,21 +73,31 @@ namespace Lulus.CustomerApp.Controllers
         {
             return RedirectToAction("Index", new { id = id });
         }
-        [HttpGet]
-        public IActionResult Sort(List<ProductViewModel> model)
-        {
-            return View();
-        }
         [HttpPost]
         public IActionResult Sort(SortModel model)
         {
-            return PartialView();
+            return RedirectToAction("Index", new { id = model.CategoryID, key = model.SubcategoryID, min = model.Min, max = model.Max }) ;
         }
         public async Task<IActionResult> Details(int id, int line)
         {
             var detail = await _productApi.GetDetailByID(new GetProductDetailRequest(id));
-            if (line == 0) line = 1;
-            return View(detail);
+            if (line == 0)
+            {
+                line = detail.ListProductLines[0].ID;
+            }
+            var product = new DetailProductModel()
+            {
+                ID = detail.ID,
+                Name = detail.Name,
+                Price = detail.Price,
+                SalePrice = detail.SalePrice,
+                Description = detail.Description,
+                Status = detail.Status,
+                ListProductLines = detail.ListProductLines,
+                ListFeedbacks = detail.ListFeedbacks,
+                CurrentLine = line
+            };
+            return View(product);
         }
     }
 }
