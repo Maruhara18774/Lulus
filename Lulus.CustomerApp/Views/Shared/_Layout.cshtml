@@ -76,14 +76,14 @@
                 <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
             </li>*@
                     </ul>
-                    @*@if (!User.Identity.IsAuthenticated)
+                    @if (!User.Identity.IsAuthenticated)
                     {
-                        <partial name="~/Views/User/Login.cshtml" />
+                        <partial name="~/Views/User/Login.cshtml" model="@null"/>
                     }
                     else
                     {
-                        <partial name="~/Views/User/Logged.cshtml" />
-                    }*@
+                        <partial name="~/Views/User/Logged.cshtml"  model="@null"/>
+                    }
                 </div>
             </div>
         </nav>
