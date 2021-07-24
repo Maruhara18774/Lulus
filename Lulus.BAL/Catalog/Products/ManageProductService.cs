@@ -44,7 +44,7 @@ namespace Lulus.BAL.Catalog.Products
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<List<ProductViewModel>>  GetAll()
+        public Task<List<ProductViewModel>>  GetAll()
         {
             throw new NotImplementedException();
         }

@@ -23,6 +23,8 @@ using Lulus.BAL.Catalog.SubCategories.Interfaces;
 using Lulus.BAL.Catalog.SubCategories;
 using Lulus.BAL.Catalog.Products;
 using Lulus.BAL.Catalog.Products.Interfaces;
+using Lulus.BAL.Catalog.Feedbacks.Interfaces;
+using Lulus.BAL.Catalog.Feedbacks;
 
 namespace Lulus.BackendApi
 {
@@ -51,6 +53,7 @@ namespace Lulus.BackendApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISubCategoryService, SubCategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IFeedbackService, FeedbackService>();
 
 
             services.AddControllers();

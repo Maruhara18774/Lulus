@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Lulus.CustomerApp.Models.Products;
 using Lulus.BAL.Catalog.Products.DTOs.Public;
 using Lulus.ViewModels.Products;
+using Lulus.ViewModels.Feedbacks;
+using System.Security.Claims;
 
 namespace Lulus.CustomerApp.Controllers
 {
@@ -17,11 +19,13 @@ namespace Lulus.CustomerApp.Controllers
         private readonly ISubCategoryApi _subCategoryApi;
         private readonly IConfiguration _configuration;
         private readonly IProductApi _productApi;
-        public ProductController(ISubCategoryApi subCategoryApi, IConfiguration configuration,IProductApi productApi)
+        private readonly IFeedbackApi _feedbackApi;
+        public ProductController(ISubCategoryApi subCategoryApi, IConfiguration configuration,IProductApi productApi, IFeedbackApi feedbackApi)
         {
             _subCategoryApi = subCategoryApi;
             _configuration = configuration;
             _productApi = productApi;
+            _feedbackApi = feedbackApi;
         }
         public async Task<IActionResult> Index(int id, int key, int page, float min, float max)
         {
@@ -98,6 +102,22 @@ namespace Lulus.CustomerApp.Controllers
                 CurrentLine = line
             };
             return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Rating(CreateFeedbackRequest request)
+        {
+            if(request.Title == null || request.Title == "")
+            {
+                ViewBag.Error = "Please input title.";
+                return PartialView();
+            }
+            var result = await _feedbackApi.CreateFeedback(request);
+            if (result)
+            {
+                return RedirectToAction("Index", new { id = request.ProductID });
+            }
+            ViewBag.Error = "Connection error.";
+            return PartialView();
         }
     }
 }

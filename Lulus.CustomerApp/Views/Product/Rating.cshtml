@@ -1,0 +1,34 @@
+﻿@model Lulus.ViewModels.Feedbacks.CreateFeedbackRequest
+@using System.Security.Claims
+
+<form asp-action="Rating" asp-controller="Product" method="post">
+    <input asp-for="ProductID" value="@Model.ProductID" hidden/>
+    <input asp-for="UserID" value="@User.FindFirst(ClaimTypes.PrimarySid).Value" hidden/>
+    <div class="form-group row">
+        <label for="star"  class="col-form-label">Star</label>
+        <div class="col-md-10">
+            <select class="form-control" id="star" name="Star">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="title" class="col-form-label">Title</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" id="title" name="Title" placeholder="Input title ..." />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="content" class="col-form-label">Content</label>
+        <div class="col-md-10">
+            <textarea class="form-control" type="text" id="content" name="Content" placeholder="Input content ..." rows="3"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-light" type="submit">Post</button>
+    </div>
+</form>

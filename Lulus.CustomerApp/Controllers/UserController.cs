@@ -49,7 +49,7 @@ namespace Lulus.CustomerApp.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         userPrinciple,
                         authProperties);
-            var user = User.FindFirstValue(ClaimTypes.PrimarySid);
+            
 
             return RedirectToAction("Index","Home");
         }
