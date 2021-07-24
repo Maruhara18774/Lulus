@@ -187,8 +187,15 @@ namespace Lulus.BAL.Catalog.Products
                 line.ListSizes = await productSizes.Select(s => new SizeViewModel()
                 {
                     ID = s.Size_ID,
-                    Key = s.Size_Key
+                    Key = s.Size_Key,
                 }).ToListAsync();
+                foreach(var size in line.ListSizes)
+                {
+                    var quantity = from q in _context.LineQuantities
+                                   where q.ProductLine_ID == line.ID && q.Size_ID == size.ID
+                                   select q;
+                    size.Quantity = quantity.Select(s => s.Quantity).FirstOrDefault();
+                }
             }
             var feedbacks = from f in _context.Feedbacks
                             where f.Product_ID == result.ID
