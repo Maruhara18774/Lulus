@@ -24,10 +24,6 @@ namespace Lulus.BackendApi.Controllers
             _manageProductLineService = manageProductLineService;
             _environment = environment;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<IActionResult> AddImage(AddImageRequest request)
         {

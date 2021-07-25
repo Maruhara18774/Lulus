@@ -14,14 +14,11 @@ namespace Lulus.BackendApi.Controllers
     [Authorize]
     public class ManageProductController : Controller
     {
+        
         private readonly IManageProductService _manageProductService;
         public ManageProductController(IManageProductService manageProductService)
         {
             _manageProductService = manageProductService;
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(ProductCreateRequest request)

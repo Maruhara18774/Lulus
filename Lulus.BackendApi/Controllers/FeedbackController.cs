@@ -17,10 +17,6 @@ namespace Lulus.BackendApi.Controllers
         {
             _feedbackService = feedbackService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<IActionResult> CreateFeedback(CreateFeedbackRequest request)
         {

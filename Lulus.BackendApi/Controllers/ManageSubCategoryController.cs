@@ -19,10 +19,7 @@ namespace Lulus.BackendApi.Controllers
         {
             _manageSubcategoryService = manageSubcategoryService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpPost]
         public async Task<IActionResult> CreateSubCategory(CreateSubCategoryRequest request)
         {
