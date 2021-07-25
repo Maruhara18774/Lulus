@@ -40,6 +40,7 @@ namespace Lulus.BAL.Catalog.Products
         public async Task<int> Delete(int productID)
         {
             var product = await _context.Products.FindAsync(productID);
+            if (product == null) return 0;
             product.Status = ProductStatus.StopBusiness;
             return await _context.SaveChangesAsync();
         }

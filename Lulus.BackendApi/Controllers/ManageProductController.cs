@@ -30,6 +30,7 @@ namespace Lulus.BackendApi.Controllers
         public async Task<IActionResult> Delete(int productID)
         {
             var result = await _manageProductService.Delete(productID);
+            if (result == 0) return BadRequest();
             return Ok(result);
         }
         [HttpPost]
