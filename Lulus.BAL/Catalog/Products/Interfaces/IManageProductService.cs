@@ -18,9 +18,5 @@ namespace Lulus.BAL.Catalog.Products.Interfaces
         Task<bool> UpdatePrice(UpdatePriceRequest request);
 
         Task<int> Delete(int productID);
-
-        Task<List<ProductViewModel>> GetAll();
-
-        Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
     }
 }
