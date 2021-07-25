@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Lulus.BAL.Catalog.ProductLines.Interfaces
 {
-    public interface ManageProductLineService
+    public interface IManageProductLineService
     {
         public Task<List<ProductLineViewModel>> GetAllLinesByID(GetAllLinesByIDRequest request);
-        public Task<bool> CreateProductLine(CreateProductLineRequest request);
+        public Task<int> CreateProductLine(CreateProductLineRequest request);
         public Task<bool> UpdateProductLine(CreateProductLineRequest request);
 
         public Task<List<ProductImageViewModel>> GetAllImage(GetAllImageByIDRequest request);

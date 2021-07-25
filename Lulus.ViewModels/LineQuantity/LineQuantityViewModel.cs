@@ -12,5 +12,6 @@ namespace Lulus.ViewModels.LineQuantity
         public int ProductLineID { get; set; }
         public int SizeID { get; set; }
         public int Quantity { get; set; }
+        public string SizeKey { get; set; }
     }
 }

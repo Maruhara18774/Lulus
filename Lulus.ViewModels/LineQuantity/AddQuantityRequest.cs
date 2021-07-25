@@ -8,6 +8,7 @@ namespace Lulus.ViewModels.LineQuantity
 {
     public class AddQuantityRequest
     {
+        public int ID { get; set; }
         public int ProductLineID { get; set; }
 
         public int Size_ID { get; set; }

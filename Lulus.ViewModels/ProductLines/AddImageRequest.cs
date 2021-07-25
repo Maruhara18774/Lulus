@@ -10,6 +10,7 @@ namespace Lulus.ViewModels.ProductLines
     public class AddImageRequest
     {
         public int ProductLineID { get; set; }
+        public string ImageUrl { get; set; }
         public IFormFile Image { get; set; }
     }
 }

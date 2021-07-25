@@ -13,6 +13,7 @@ namespace Lulus.ViewModels.ProductLines
 
         public string Texture_Name { get; set; }
 
+        public string Texture_ImageUrl { get; set; }
         public IFormFile Texture_Image { get; set; }
 
         public int Product_ID { get; set; }
