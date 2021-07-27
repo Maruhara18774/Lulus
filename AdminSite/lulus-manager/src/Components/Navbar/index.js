@@ -4,9 +4,9 @@ import { Menu} from 'antd';
 import { AppstoreOutlined, DoubleRightOutlined, LineChartOutlined,UserOutlined,LockOutlined } from '@ant-design/icons';
 import logoUrl from '../../Assets/logo/logo.png';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 const { SubMenu } = Menu;
-
 export class Navbar extends Component {
     constructor(props) {
         super(props)
@@ -26,6 +26,7 @@ export class Navbar extends Component {
         switch(e.key){
             // Category
             case "listCategory":
+                this.props.history.push("/listCategory");
                 break;
             case "createCategory":
                 break;
@@ -83,7 +84,7 @@ export class Navbar extends Component {
                     <SubMenu key="common" icon={<AppstoreOutlined />} title="General management">
                         <Menu.ItemGroup key="category" title="Categories">
                             <Menu.Item key="listCategory">List categories</Menu.Item>
-                            <Menu.Item key="createCategory">Create new category</Menu.Item>
+                            <Menu.Item key="createCategory">Create new subcategory</Menu.Item>
                         </Menu.ItemGroup>
                         <Menu.ItemGroup key="product" title="Products">
                             <Menu.Item key="listProduct">List products</Menu.Item>
@@ -157,4 +158,4 @@ export class Navbar extends Component {
     }
 }
 
-export default Navbar
+export default withRouter(Navbar)

@@ -10,6 +10,9 @@ import Navbar from './Components/Navbar';
 import Home from './Pages/Home';
 import PageNotFound from './Pages/NotFound';
 import LoginForm from './Pages/Login';
+import ListCategories from './Pages/Categories/List'
+import ListSubCategories from './Pages/SubCategories/List';
+import ManageSubCategory from './Pages/SubCategories/Manage'; 
 
 export class App extends Component {
   constructor(props) {
@@ -35,6 +38,10 @@ export class App extends Component {
               </div>
               <div className="content">
                 <Switch>
+                  <Route path="/listCategory" component={ListCategories} />
+                  <Route path="/listSubCategory/:id" component={ListSubCategories} />
+                  <Route path="/manageSubCategory/:id" component={ManageSubCategory} />
+                  <Route path="/manageSubCategory" component={ManageSubCategory} />
                   <Route path="/" component={Home} />
                   <Route path="**" component={PageNotFound} />
                 </Switch>

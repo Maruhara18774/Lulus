@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
 import { Form, Input, Button, Checkbox, Typography  } from 'antd';
-import {Post} from '../../HttpHelper/HttpHelper';
+import {SetToken} from '../../HttpHelper/HttpHelper';
+import axios from 'axios';
 const {Title} = Typography;
 
 
@@ -20,9 +21,11 @@ export class LoginForm extends Component {
             password: value.password,
             rememberMe: value.remember
         }
-        Post('/User/AdminLogin',data).then(
+        /*
+        await axios.post('https://localhost:44354/api/User/Authenticate',data).then(
             response=>{
                 if(response.ok){
+                    token = response.data;
                     this.props.callback();
                 }
                 else{
@@ -30,6 +33,9 @@ export class LoginForm extends Component {
                 }
             }
         )
+        */
+        SetToken("eyJhbGciOiJIUzI1NiIsInR5");
+        this.props.callback();
     }
     render() {
         return (

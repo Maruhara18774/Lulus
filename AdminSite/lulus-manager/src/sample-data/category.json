@@ -1,0 +1,46 @@
+[
+    {
+      "id": 1,
+      "name": "Dresses"
+    },
+    {
+      "id": 2,
+      "name": "Tops"
+    },
+    {
+      "id": 3,
+      "name": "Bottoms"
+    },
+    {
+      "id": 4,
+      "name": "Activewear"
+    },
+    {
+      "id": 5,
+      "name": "Swimwear"
+    },
+    {
+      "id": 6,
+      "name": "Light Outerwear"
+    },
+    {
+      "id": 7,
+      "name": "Rompers and Jumpsuits"
+    },
+    {
+      "id": 8,
+      "name": "Denim"
+    },
+    {
+      "id": 9,
+      "name": "Loungewear"
+    },
+    {
+      "id": 10,
+      "name": "Shoes"
+    },
+    {
+      "id": 11,
+      "name": "Accessories"
+    }
+  ]

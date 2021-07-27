@@ -1,0 +1,7 @@
+.actionBtn{
+    color:dodgerblue;
+    cursor: pointer;
+}
+.actionBtn:hover{
+    color: orangered;
+}

@@ -1,24 +1,22 @@
 import { Table, Space,Button } from 'antd';
 import React, { Component } from 'react';
 import './index.css';
+import SampleSubCategory from '../../../sample-data/subcategory.json';
+import {withRouter} from 'react-router-dom'
 
 export class ListSubCategories extends Component {
     constructor(props) {
         super(props)
-    
+        // Get id by: this.props.match.params.id
         this.state = {
-             lsSubCategories: [],
-             dataSource: [],
+             dataSource: SampleSubCategory,
              columns: []
         }
     }
     async componentDidMount(){
+        // Note
+        // Axios get data here with this.props.cateID
         this.state.columns = [
-            {
-                title: 'ID',
-                dataIndex: 'id',
-                key: 'id',
-              },
             {
             title: 'Sub-category name',
             dataIndex: 'name',
@@ -29,26 +27,37 @@ export class ListSubCategories extends Component {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <a>Edit</a>
-                    <a onClick={()=>this.deleteSubCate(record.id)}>Delete</a>
+                    <p className= "actionBtn" onClick={()=>this.editSubCate(record.id)}>Edit</p>
+                    <p onClick={()=>this.deleteSubCate(record.id)} className="actionBtn">Delete</p>
                 </Space>
               ),
           },
         ]
+        this.setState(this);
+    }
+    createSubCate(){
+        this.props.history.push("/manageSubCategory");
     }
     deleteSubCate(key){
         // Check key have products, if not allow delete
     }
+    editSubCate(key){
+        this.props.history.push("/manageSubCategory/"+key);
+    }
+    goBackPrevious(){
+        this.props.history.goBack();
+    }
     render() {
         return (
             <div>
-                <Button type="primary" shape="circle">
-                    +
+                <Button type="primary" shape="round" className="btnPosition" onClick = {()=>this.createSubCate()}>
+                    New Subcategory +
                 </Button>
                 <Table dataSource={this.state.dataSource} columns = {this.state.columns}/>
+                <Button type="primary" shape="round" onClick={()=>this.goBackPrevious()} className="btnPosition">Go back</Button>
             </div>
         )
     }
 }
 
-export default ListSubCategories
+export default withRouter(ListSubCategories)
