@@ -13,16 +13,19 @@ import LoginForm from './Pages/Login';
 import ListCategories from './Pages/Categories/List'
 import ListSubCategories from './Pages/SubCategories/List';
 import ManageSubCategory from './Pages/SubCategories/Manage'; 
+import ListProducts from './Pages/Products/List';
+import ManageProduct from './Pages/Products/Manage';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logged: false
+      logged: false,
+      token: ""
     }
   }
-  callbackLogin = () => {
-    this.setState({ logged: true });
+  callbackLogin = (receiver) => {
+    this.setState({ logged: true, token: receiver });
   }
   callbackLogout = () => {
     this.setState({ logged: false });
@@ -38,10 +41,13 @@ export class App extends Component {
               </div>
               <div className="content">
                 <Switch>
-                  <Route path="/listCategory" component={ListCategories} />
-                  <Route path="/listSubCategory/:id" component={ListSubCategories} />
-                  <Route path="/manageSubCategory/:id" component={ManageSubCategory} />
-                  <Route path="/manageSubCategory" component={ManageSubCategory} />
+                  <Route path="/listCategory" render={()=><ListCategories token={this.state.token}/>} />
+                  <Route path="/listSubCategory/:id" render={()=><ListSubCategories token={this.state.token}/>} />
+                  <Route path="/manageSubCategory/:id" render={()=><ManageSubCategory token={this.state.token}/>} />
+                  <Route path="/manageSubCategory" render={()=><ManageSubCategory token={this.state.token}/>} />
+                  <Route path="/listProduct" render={()=><ListProducts token={this.state.token}/>} />
+                  <Route path="/manageProduct/:id" render={()=><ManageProduct token={this.state.token}/>}/>
+                  <Route path="/manageProduct" render={()=><ManageProduct token={this.state.token}/>}/>
                   <Route path="/" component={Home} />
                   <Route path="**" component={PageNotFound} />
                 </Switch>

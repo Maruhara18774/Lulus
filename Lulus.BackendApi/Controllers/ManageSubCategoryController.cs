@@ -33,9 +33,15 @@ namespace Lulus.BackendApi.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> EditSubCategory(CreateSubCategoryRequest request)
+        public async Task<IActionResult> EditSubCategory(EditSubCategoryRequest request)
         {
             var result = await _manageSubcategoryService.EditSubCategory(request);
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetSubCateDetailByID(GetSubCateDetailByID request)
+        {
+            var result = await _manageSubcategoryService.GetSubCateDetailByID(request);
             return Ok(result);
         }
     }

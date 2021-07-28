@@ -118,6 +118,15 @@ namespace Lulus.BackendApi
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyHeader();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +147,7 @@ namespace Lulus.BackendApi
 
             app.UseAuthentication();
             app.UseRouting();
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseSwagger();

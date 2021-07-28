@@ -1,4 +1,5 @@
 ﻿
+using Lulus.ViewModels.Common;
 using Lulus.ViewModels.Products;
 using Lulus.ViewModels.Products.Manage;
 using System;
@@ -16,6 +17,7 @@ namespace Lulus.BAL.Catalog.Products.Interfaces
         Task<int> Update(ProductUpdateRequest request);
 
         Task<bool> UpdatePrice(UpdatePriceRequest request);
+        Task<List<ProductViewModel>> GetAllProduct(PagingRequestBase request);
 
         Task<int> Delete(int productID);
     }

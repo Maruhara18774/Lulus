@@ -2,7 +2,8 @@ import { Table, Space,Button } from 'antd';
 import React, { Component } from 'react';
 import './index.css';
 import SampleSubCategory from '../../../sample-data/subcategory.json';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import {Post} from '../../../HttpHelper/HttpHelper';
 
 export class ListSubCategories extends Component {
     constructor(props) {
@@ -33,6 +34,12 @@ export class ListSubCategories extends Component {
               ),
           },
         ]
+        var result = await Post(this.props.token,'/SubCategory/GetList',{
+            categoryID: this.props.match.params.id
+        })
+        if(result.status == 200){
+            this.state.dataSource = result.data;
+        }
         this.setState(this);
     }
     createSubCate(){

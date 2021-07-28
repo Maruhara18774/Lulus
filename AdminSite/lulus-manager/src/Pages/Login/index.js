@@ -21,21 +21,16 @@ export class LoginForm extends Component {
             password: value.password,
             rememberMe: value.remember
         }
-        /*
         await axios.post('https://localhost:44354/api/User/Authenticate',data).then(
             response=>{
-                if(response.ok){
-                    token = response.data;
-                    this.props.callback();
+                if(response.status == 200){
+                    this.props.callback(response.data);
                 }
                 else{
                     alert("Wrong login info.")
                 }
             }
         )
-        */
-        SetToken("eyJhbGciOiJIUzI1NiIsInR5");
-        this.props.callback();
     }
     render() {
         return (

@@ -29,12 +29,14 @@ export class Navbar extends Component {
                 this.props.history.push("/listCategory");
                 break;
             case "createCategory":
+                this.props.history.push("/manageSubCategory");
                 break;
-
             // Product
             case "listProduct":
+                this.props.history.push("/listProduct");
                 break;
             case "createProduct":
+                this.props.history.push("/manageProduct");
                 break;
 
             // User

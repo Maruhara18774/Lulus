@@ -37,13 +37,30 @@ namespace Lulus.BAL.Catalog.SubCategories
             return true;
         }
 
-        public async Task<int> EditSubCategory(CreateSubCategoryRequest request)
+        public async Task<int> EditSubCategory(EditSubCategoryRequest request)
         {
-            var subcate = await _context.SubCategories.FindAsync(request.CategoryID);
+            var subcate = await _context.SubCategories.FindAsync(request.ID);
             if (subcate == null) return 0;
             subcate.Category_ID = request.CategoryID;
             subcate.SubCategory_Name = request.Name;
             return await _context.SaveChangesAsync();
+        }
+        public async Task<SubCateViewModel> GetSubCateDetailByID(GetSubCateDetailByID request)
+        {
+            var subcate = await _context.SubCategories.FindAsync(request.ID);
+            if (subcate == null) return null;
+            var data = new SubCateViewModel()
+            {
+                ID = subcate.SubCategory_ID,
+                Name = subcate.SubCategory_Name
+            };
+            var category = await _context.Categories.FindAsync(subcate.Category_ID);
+            data.Category = new ViewModels.Categories.CategoryViewModel()
+            {
+                ID = category.Category_ID,
+                Name = category.Category_Name
+            };
+            return data;
         }
     }
 }

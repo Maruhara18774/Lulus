@@ -7,7 +7,6 @@ export class ListProductLines extends Component {
         super(props)
     
         this.state = {
-             lsSubCategories: [],
              dataSource: [],
              columns: []
         }

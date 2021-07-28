@@ -1,14 +1,14 @@
 import { Table } from 'antd';
 import React, { Component } from 'react';
-import SampleCategory from '../../../sample-data/category.json';
 import './index.css';
 import { withRouter } from "react-router-dom";
+import {Get} from '../../../HttpHelper/HttpHelper';
 
 export class ListCategories extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             dataSource: SampleCategory,
+             dataSource: [],
              columns: []
         }
     }
@@ -32,6 +32,10 @@ export class ListCategories extends Component {
               ),
           },
         ]
+        const result = await Get(this.props.token,'/Category');
+        if(result.status == 200){
+          this.state.dataSource = result.data;
+        }
         await this.setState(this);
     }
     render() {

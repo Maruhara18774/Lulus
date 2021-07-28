@@ -1,4 +1,5 @@
 ﻿using Lulus.BAL.Catalog.Products.Interfaces;
+using Lulus.ViewModels.Common;
 using Lulus.ViewModels.Products.Manage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,12 @@ namespace Lulus.BackendApi.Controllers
         public async Task<IActionResult> UpdatePrice(UpdatePriceRequest request)
         {
             var result = await _manageProductService.UpdatePrice(request);
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetAll(PagingRequestBase request)
+        {
+            var result = await _manageProductService.GetAllProduct(request);
             return Ok(result);
         }
     }

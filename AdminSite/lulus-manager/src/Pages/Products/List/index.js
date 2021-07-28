@@ -1,14 +1,15 @@
 import { Table, Space,Button } from 'antd';
 import React, { Component } from 'react';
 import './index.css';
+import SampleProduct from '../../../sample-data/product.json';
+import {withRouter} from 'react-router-dom';
 
 export class ListProducts extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             lsProduct: [],
-             dataSource: [],
+             dataSource: SampleProduct,
              columns: []
         }
     }
@@ -30,27 +31,36 @@ export class ListProducts extends Component {
             key: 'price',
           },
           {
-            title: 'Category',
-            dataIndex: 'category',
-            key: 'category',
+            title: 'Sale Price',
+            dataIndex: 'salePrice',
+            key: 'salePrice',
           },
           {
-            title: 'Sub-category',
-            dataIndex: 'subcategory',
-            key: 'subcategory',
+            title: 'Number of lines',
+            key: 'line',
+            render:(text,record)=>(
+              <p>{record.listProductLines.length}</p>
+            )
           },
           {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <a>List productlines</a>
-                    <a>Edit</a>
-                    <a onClick={()=>this.deleteSubCate(record.id)}>Delete</a>
+                    <p className= "actionBtn">List productlines</p>
+                    <p className= "actionBtn" onClick={()=>this.editProduct(record.id)}>Edit</p>
+                    <p className= "actionBtn" onClick={()=>this.deleteSubCate(record.id)}>Delete</p>
                 </Space>
               ),
           },
         ]
+        this.setState(this);
+    }
+    createProduct(){
+        this.props.history.push("/manageProduct");
+    }
+    editProduct(id){
+      this.props.history.push("/manageProduct/"+id);
     }
     deleteSubCate(key){
         // Check key have product line and order of product line, if not allow delete
@@ -58,8 +68,8 @@ export class ListProducts extends Component {
     render() {
         return (
             <div>
-                <Button type="primary" shape="circle">
-                    +
+                <Button type="primary" shape="round" className="btnPosition" onClick = {()=>this.createProduct()}>
+                    New Product +
                 </Button>
                 <Table dataSource={this.state.dataSource} columns = {this.state.columns}/>
             </div>
@@ -67,4 +77,4 @@ export class ListProducts extends Component {
     }
 }
 
-export default ListProducts
+export default withRouter(ListProducts)
