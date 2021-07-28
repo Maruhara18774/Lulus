@@ -9,5 +9,6 @@ namespace Lulus.CustomerApp.Services.Interfaces
     public interface IUserApi
     {
         public Task<string> Login(LoginRequest request);
+        public Task<bool> Register(RegisterRequest request);
     }
 }

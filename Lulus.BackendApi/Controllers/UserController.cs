@@ -51,9 +51,9 @@ namespace Lulus.BackendApi.Controllers
             var result = await _userService.Register(request);
             if (!result)
             {
-                return BadRequest("Register failed.");
+                return BadRequest(false);
             }
-            return Ok("Registed.");
+            return Ok(true);
         }
         [HttpPost("AdminLogin")]
         [AllowAnonymous]

@@ -114,7 +114,7 @@ namespace Lulus.CustomerApp.Controllers
             var result = await _feedbackApi.CreateFeedback(request);
             if (result)
             {
-                return RedirectToAction("Index", new { id = request.ProductID });
+                return RedirectToAction("Details", new { id = request.ProductID });
             }
             ViewBag.Error = "Connection error.";
             return PartialView();

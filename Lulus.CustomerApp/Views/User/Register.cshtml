@@ -1,0 +1,49 @@
+﻿@model Lulus.CustomerApp.Models.Users.CustomRegister
+<style>
+    .registerWrap{
+        margin:10%;
+        margin-top:15px
+    }
+</style>
+<div class="registerWrap">
+    <h2 class="text-center">Register</h2>
+    <form asp-action="Register" asp-controller="User" method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Input your email ..." asp-for="Email">
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="firstname">First name</label>
+                <input type="text" class="form-control" id="firstname" placeholder="Input first name ..." asp-for="FirstName">
+            </div>
+            <div class="form-group col">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname" placeholder="Input last name ..." asp-for="LastName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Input username ..." asp-for="Username">
+            <small id="help" class="form-text text-muted">You'll use it for login.</small>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Input password ..." asp-for="Password">
+            </div>
+            <div class="form-group col">
+                <label for="confirm">Confirm password</label>
+                <input type="password" class="form-control" id="confirm" placeholder="Confirm your password ..." asp-for="ConfirmPassword">
+            </div>
+        </div>
+        @if (ViewBag.Log != null)
+        {
+            <p class="text-danger">* @ViewBag.Log</p>
+        }
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Send</button>
+        </div>
+    </form>
+</div>
+    

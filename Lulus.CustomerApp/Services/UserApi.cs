@@ -29,5 +29,19 @@ namespace Lulus.CustomerApp.Services
             var token = await respond.Content.ReadAsStringAsync();
             return token;
         }
+        public async Task<bool> Register(RegisterRequest request)
+        {
+            var json = JsonConvert.SerializeObject(request);
+            var httpcontent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://localhost:44354");
+            var respond = await client.PostAsync("/api/User/Register", httpcontent);
+            if (respond.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

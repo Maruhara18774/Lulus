@@ -14,6 +14,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Lulus.CustomerApp.Models.Users;
 
 namespace Lulus.CustomerApp.Controllers
 {
@@ -79,6 +80,36 @@ namespace Lulus.CustomerApp.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index","Home");
+        }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(CustomRegister register)
+        {
+            if(register.Password != register.ConfirmPassword)
+            {
+                ViewBag.Log = "Confirm password was wrong.";
+                return View(register);
+            }
+            var request = new RegisterRequest()
+            {
+                Email = register.Email,
+                Username = register.Username,
+                FirstName = register.FirstName,
+                LastName = register.LastName,
+                Password = register.Password
+            };
+            var result = await _userApi.Register(request);
+            if (result)
+            {
+                ViewBag.Log = "Success. Now, you can use it to login.";
+                return View(new CustomRegister());
+            }
+            ViewBag.Log = "Something was wrong.";
+            return View(register);
         }
     }
 }
