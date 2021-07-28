@@ -1,16 +1,17 @@
 import { Table, Space,Button } from 'antd';
 import React, { Component } from 'react';
 import './index.css';
-import SampleProduct from '../../../sample-data/product.json';
 import {withRouter} from 'react-router-dom';
+import {Post} from '../../../HttpHelper/HttpHelper';
 
 export class ListProducts extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             dataSource: SampleProduct,
-             columns: []
+             dataSource: [],
+             columns: [],
+             currentPage: 1
         }
     }
     async componentDidMount(){
@@ -47,13 +48,20 @@ export class ListProducts extends Component {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <p className= "actionBtn">List productlines</p>
+                    <p className= "actionBtn" onClick={()=>this.listProductLine(record.id)}>List productlines</p>
                     <p className= "actionBtn" onClick={()=>this.editProduct(record.id)}>Edit</p>
                     <p className= "actionBtn" onClick={()=>this.deleteSubCate(record.id)}>Delete</p>
                 </Space>
               ),
           },
         ]
+        var result = await Post(this.props.token,'/ManageProduct/GetAll',{
+          "pageIndex": this.state.currentPage,
+          "pageSize": 10
+        });
+        if(result.status == 200){
+          this.state.dataSource= result.data;
+        }
         this.setState(this);
     }
     createProduct(){
@@ -64,6 +72,9 @@ export class ListProducts extends Component {
     }
     deleteSubCate(key){
         // Check key have product line and order of product line, if not allow delete
+    }
+    listProductLine(id){
+      this.props.history.push("/listProductLine/"+id);
     }
     render() {
         return (

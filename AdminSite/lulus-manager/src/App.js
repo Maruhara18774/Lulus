@@ -15,6 +15,8 @@ import ListSubCategories from './Pages/SubCategories/List';
 import ManageSubCategory from './Pages/SubCategories/Manage'; 
 import ListProducts from './Pages/Products/List';
 import ManageProduct from './Pages/Products/Manage';
+import ManageProductLine from './Pages/ProductLines/Manage';
+import ListProductLines from './Pages/ProductLines/List';
 
 export class App extends Component {
   constructor(props) {
@@ -48,6 +50,9 @@ export class App extends Component {
                   <Route path="/listProduct" render={()=><ListProducts token={this.state.token}/>} />
                   <Route path="/manageProduct/:id" render={()=><ManageProduct token={this.state.token}/>}/>
                   <Route path="/manageProduct" render={()=><ManageProduct token={this.state.token}/>}/>
+                  <Route path="/listProductLine/:id" render={()=><ListProductLines token={this.state.token}/>}/>
+                  <Route path="/manageProductLine/:id" render={()=><ManageProductLine token={this.state.token}/>}/>
+                  <Route path="/manageProductLine" render={()=><ManageProductLine token={this.state.token}/>}/>
                   <Route path="/" component={Home} />
                   <Route path="**" component={PageNotFound} />
                 </Switch>

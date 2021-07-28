@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import './index.css';
 import { Form, Input, Button, Checkbox, Typography, Select } from 'antd';
 import {withRouter} from 'react-router-dom';
-import SampleCategory from '../../../sample-data/category.json';
-import SampleSubCategory from '../../../sample-data/subcategory.json';
+import {Post} from '../../../HttpHelper/HttpHelper';
 const {Title} = Typography;
 const {Option} = Select;
 
-export class ManageProduct extends Component {
+export class ManageProductLine extends Component {
     constructor(props) {
         super(props);
         this.state = {
              isCreate: (this.props.match.params.id == undefined),
-             lsCategory: SampleCategory,
-             lsSubCategory: SampleSubCategory,
+             lsCategory: [],
+             lsSubCategory: [],
              lsAvailableSubCategory: []
         }
     }
@@ -24,20 +23,6 @@ export class ManageProduct extends Component {
         /* Mindset: when choose a category, go load subcate by val
          */
         alert(val);
-    }
-    createProduct = async () =>{
-
-    }
-    editProduct = async () =>{
-
-    }
-    submitHandler = () =>{
-        if(this.state.isCreate){
-            this.createProduct();
-        }
-        else{
-            this.editProduct();
-        }
     }
     render() {
         return (
@@ -110,4 +95,4 @@ export class ManageProduct extends Component {
     }
 }
 
-export default withRouter(ManageProduct);
+export default withRouter(ManageProductLine);
