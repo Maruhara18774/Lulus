@@ -59,7 +59,7 @@ export class ListProducts extends Component {
           "pageIndex": this.state.currentPage,
           "pageSize": 10
         });
-        if(result.status == 200){
+        if(result.status === 200){
           this.state.dataSource= result.data;
         }
         this.setState(this);

@@ -35,7 +35,7 @@ export class ListProductLines extends Component {
             title: 'Texture image',
             key: 'texture_Image',
             render:(text,record) =>(
-                <img src={ConvertResources(record.texture_Image_Url)} alt="Texture Image"/>
+                <img src={ConvertResources(record.texture_Image_Url)} alt={record.texture_Name}/>
             )
           },
           {
@@ -44,7 +44,7 @@ export class ListProductLines extends Component {
             render: (text, record) => (
                 <Space size="middle">
                     <p className= "actionBtn">Detail</p>
-                    <p className= "actionBtn">Edit</p>
+                    <p className= "actionBtn" onClick={()=>this.editProductLine(record.id)}>Edit</p>
                     <p className= "actionBtn" onClick={()=>this.deleteSubCate(record.id)}>Delete</p>
                 </Space>
               ),
@@ -53,7 +53,7 @@ export class ListProductLines extends Component {
         var result = await Post(this.props.token,'/ManageProductLine/GetAllLinesByID',{
             "productID": this.props.match.params.id
           })
-        if(result.status == 200){
+        if(result.status === 200){
             this.state.dataSource = result.data;
             this.setState(this);
         }
@@ -66,10 +66,16 @@ export class ListProductLines extends Component {
     goBackPrevious(){
         this.props.history.goBack();
     }
+    editProductLine(id){
+        this.props.history.push('/manageProductLine/'+id);
+    }
+    createProductLine(){
+        this.props.history.push('/manageProductLine');
+    }
     render() {
         return (
             <div>
-                <Button type="primary" shape="round" className="btnPosition">
+                <Button type="primary" shape="round" className="btnPosition" onClick={()=>this.createProductLine()}>
                     Add product line +
                 </Button>
                 <Table dataSource={this.state.dataSource} columns = {this.state.columns}/>

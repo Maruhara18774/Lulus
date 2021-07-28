@@ -1,28 +1,66 @@
 import React, { Component } from 'react';
 import './index.css';
-import { Form, Input, Button, Checkbox, Typography, Select } from 'antd';
-import {withRouter} from 'react-router-dom';
-import {Post} from '../../../HttpHelper/HttpHelper';
-const {Title} = Typography;
-const {Option} = Select;
+import { Form, Input, Button, Typography, Select, Upload} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { withRouter } from 'react-router-dom';
+import { Post } from '../../../HttpHelper/HttpHelper';
+const { Title } = Typography;
+const { Option } = Select;
 
 export class ManageProductLine extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             isCreate: (this.props.match.params.id == undefined),
-             lsCategory: [],
-             lsSubCategory: [],
-             lsAvailableSubCategory: []
+            isCreate: (this.props.match.params.id === undefined),
+            lsProduct: [],
+            imageFile: ""
         }
     }
-    goPreviousPage(){
+    async componentDidMount() {
+        var result = await Post(this.props.token, '/ManageProduct/GetAll', {
+            "pageIndex": 1,
+            "pageSize": 10000
+        });
+        if (result.status === 200) {
+            this.state.lsProduct = result.data;
+        }
+        this.setState(this);
+    }
+    goPreviousPage() {
         this.props.history.goBack();
     }
-    onCategoryChange(val){
+    onCategoryChange(val) {
         /* Mindset: when choose a category, go load subcate by val
          */
         alert(val);
+    }
+    create = async (val) => {
+        const result = await Post(this.props.token, '/ManageProductLine/CreateProductLine', {
+            "productLine_ID": 0,
+            "texture_Name": val.name,
+            "texture_ImageUrl": "",
+            "texture_Image": undefined,
+            "product_ID": val.product
+        });
+        if (result.status === 200) {
+            alert("Added success.");
+            this.goPreviousPage();
+        }
+        else {
+            alert("Added fail.")
+        }
+    }
+    edit = async (val) =>{
+
+    }
+    submitHandler=(val)=>{
+        if(this.state.isCreate){
+            //this.create(val);
+            console.log(val)
+        }
+        else{
+            this.edit(val);
+        }
     }
     render() {
         return (
@@ -33,61 +71,39 @@ export class ManageProductLine extends Component {
                     onFinish={this.submitHandler}
                 >
                     <Form.Item>
-                        {this.state.isCreate?<Title>Create Product</Title>:<Title>Edit Product</Title>}
+                        {this.state.isCreate ? <Title>Create Product Line</Title> : <Title>Edit Product Line</Title>}
                     </Form.Item>
                     <Form.Item
-                        label="Product's name:"
+                        label="Texture's name:"
                         name="name"
-                        rules={[{ required: true, message: "Please input Product's name!" }]}
+                        rules={[{ required: true, message: "Please input Texture's name!" }]}
                     >
-                        <Input className="custom-input"/>
+                        <Input className="custom-input" />
                     </Form.Item>
-                    <Form.Item name="category" label="Category:" rules={[{ required: true }]}>
+                    <Form.Item
+                        name="upload"
+                        label="Upload texture image:"
+                        valuePropName="fileList"
+                    >
+                        <Upload name="logo" listType="picture">
+                            <Button icon={<UploadOutlined />}>Click to upload</Button>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item name="product" label="Product:" rules={[{ required:true, message: "Please choose a Product!" }]}>
                         <Select
-                            placeholder="Select a Category"
-                            onChange={this.onCategoryChange}
+                            placeholder="Select a Product"
                             allowClear
                         >
-                            {this.state.lsCategory.map((val,key)=>{
-                                return(<Option value={val.id}>{val.name}</Option>)
+                            {this.state.lsProduct.map((val, key) => {
+                                return (<Option value={val.id}>{val.name}</Option>)
                             })}
                         </Select>
-                    </Form.Item>
-                    <Form.Item name="subcategory" label="Subcategory:" rules={[{ required: true }]}>
-                        <Select
-                            placeholder="Select a Subcategory"
-                            onChange={this.onCategoryChange}
-                            allowClear
-                        >
-                            {this.state.lsAvailableSubCategory.map((val,key)=>{
-                                return(<Option value={val.id}>{val.name}</Option>)
-                            })}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        label="Product's price:"
-                        name="price"
-                        rules={[{ required: true, message: "Please input Product's price!" }]}
-                    >
-                        <Input className="custom-input" type="number"/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Product's sale price:"
-                        name="saleprice"
-                    >
-                        <Input className="custom-input" type="number"/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Product's description:"
-                        name="description"
-                    >
-                        <Input.TextArea className="custom-input"/>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
-                        {this.state.isCreate?
-                        <Button type="primary" htmlType="submit">Create</Button>:
-                        <Button type="primary" htmlType="submit">Save</Button>}
-                        <Button type="primary" style={{marginLeft:"10px"}} onClick={()=>this.goPreviousPage()}>Go back</Button>
+                        {this.state.isCreate ?
+                            <Button type="primary" htmlType="submit">Create</Button> :
+                            <Button type="primary" htmlType="submit">Save</Button>}
+                        <Button type="primary" style={{ marginLeft: "10px" }} onClick={() => this.goPreviousPage()}>Go back</Button>
                     </Form.Item>
                 </Form>
             </div>

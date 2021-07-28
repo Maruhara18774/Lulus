@@ -37,7 +37,7 @@ export class ListSubCategories extends Component {
         var result = await Post(this.props.token,'/SubCategory/GetList',{
             categoryID: this.props.match.params.id
         })
-        if(result.status == 200){
+        if(result.status === 200){
             this.state.dataSource = result.data;
         }
         this.setState(this);

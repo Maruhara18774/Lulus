@@ -33,7 +33,7 @@ export class ListCategories extends Component {
           },
         ]
         const result = await Get(this.props.token,'/Category');
-        if(result.status == 200){
+        if(result.status === 200){
           this.state.dataSource = result.data;
         }
         await this.setState(this);

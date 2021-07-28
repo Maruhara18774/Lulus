@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
 import { Form, Input, Button, Checkbox, Typography  } from 'antd';
-import {SetToken} from '../../HttpHelper/HttpHelper';
 import axios from 'axios';
 const {Title} = Typography;
 
@@ -23,7 +22,7 @@ export class LoginForm extends Component {
         }
         await axios.post('https://localhost:44354/api/User/Authenticate',data).then(
             response=>{
-                if(response.status == 200){
+                if(response.status === 200){
                     this.props.callback(response.data);
                 }
                 else{

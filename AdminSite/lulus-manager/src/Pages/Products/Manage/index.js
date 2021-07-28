@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
-import { Form, Input, Button, Checkbox, Typography, Select } from 'antd';
+import { Form, Input, Button, Typography, Select } from 'antd';
 import {withRouter} from 'react-router-dom';
-import SampleCategory from '../../../sample-data/category.json';
-import SampleSubCategory from '../../../sample-data/subcategory.json';
+import {Get,Post} from '../../../HttpHelper/HttpHelper';
 const {Title} = Typography;
 const {Option} = Select;
 
@@ -11,32 +10,71 @@ export class ManageProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             isCreate: (this.props.match.params.id == undefined),
-             lsCategory: SampleCategory,
-             lsSubCategory: SampleSubCategory,
-             lsAvailableSubCategory: []
+             isCreate: (this.props.match.params.id === undefined),
+             lsCategory: [],
+             lsSubCategory:[]
         }
     }
     goPreviousPage(){
         this.props.history.goBack();
     }
-    onCategoryChange(val){
-        /* Mindset: when choose a category, go load subcate by val
-         */
-        alert(val);
+    async componentDidMount(){
+        const result = await Get(this.props.token,'/Category');
+        if(result.status === 200){
+          this.state.lsCategory = result.data;
+        }
+        this.setState(this);
     }
-    createProduct = async () =>{
-
+    onCategoryChange = async (val) =>{
+        const result = await Post(this.props.token,'/SubCategory/GetList',{
+            categoryID: val
+        });
+        if(result.status === 200){
+          this.state.lsSubCategory = result.data;
+        }
+        this.setState(this);
     }
-    editProduct = async () =>{
-
-    }
-    submitHandler = () =>{
-        if(this.state.isCreate){
-            this.createProduct();
+    createProduct = async (val) =>{
+        const result = await Post(this.props.token,'/ManageProduct/Create',{
+            "name": val.name,
+            "price": val.price,
+            "salePrice": val.saleprice,
+            "description": val.description,
+            "subCategoryID": val.subcategory
+          });
+        if(result.status === 200){
+          alert("Added success.");
+          this.goPreviousPage();
         }
         else{
-            this.editProduct();
+            alert("Added fail.")
+        }
+    }
+    editProduct = async (val) =>{
+        const checkSalePrice = val.saleprice === 0 || val.saleprice === undefined? val.price: val.saleprice;
+        const result = await Post(this.props.token,'/ManageProduct/Update',{
+            "id":this.props.match.params.id,
+            "name": val.name,
+            "price": val.price,
+            "salePrice": checkSalePrice,
+            "description": val.description,
+            "subCategoryID": val.subcategory,
+            "status": 0
+          });
+        if(result.status === 200){
+          alert("Edited success.");
+          this.goPreviousPage();
+        }
+        else{
+            alert("Edited fail.")
+        }
+    }
+    submitHandler = (val) =>{
+        if(this.state.isCreate){
+            this.createProduct(val);
+        }
+        else{
+            this.editProduct(val);
         }
     }
     render() {
@@ -74,7 +112,7 @@ export class ManageProduct extends Component {
                             onChange={this.onCategoryChange}
                             allowClear
                         >
-                            {this.state.lsAvailableSubCategory.map((val,key)=>{
+                            {this.state.lsSubCategory.map((val,key)=>{
                                 return(<Option value={val.id}>{val.name}</Option>)
                             })}
                         </Select>

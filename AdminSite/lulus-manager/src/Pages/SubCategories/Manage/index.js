@@ -11,7 +11,7 @@ export class ManageSubCategory extends Component {
         super(props);
         this.state = {
             lsCategory: [],
-             isCreate: (this.props.match.params.id == undefined),
+             isCreate: (this.props.match.params.id === undefined),
              defaultCate: {},
              defaultName: ""
         }
@@ -21,7 +21,7 @@ export class ManageSubCategory extends Component {
     }
     async componentDidMount(){
         var result = await Get(this.props.token,'/Category');
-        if(result.status == 200){
+        if(result.status === 200){
             this.state.lsCategory = result.data;
         }
         this.setState(this);
@@ -30,7 +30,7 @@ export class ManageSubCategory extends Component {
         var result = await Post(this.props.token,'/ManageSubCategory/GetSubCateDetailByID',{
             "id": this.props.match.params.id,
           })
-        if(result.status == 200){
+        if(result.status === 200){
             console.log(result.data)
             this.state.defaultCate = result.data.category;
             this.state.defaultName = result.data.name;
@@ -45,7 +45,7 @@ export class ManageSubCategory extends Component {
             "categoryID": val.category,
             "name": val.name
           })
-        if(result.status == 200){
+        if(result.status === 200){
             alert('Added success.');
             this.goPreviousPage();
         }
@@ -59,7 +59,7 @@ export class ManageSubCategory extends Component {
             "categoryID": val.category,
             "name": val.name
           })
-          if(result.status == 200){
+          if(result.status === 200){
             alert('Edited success.');
             this.goPreviousPage();
         }
