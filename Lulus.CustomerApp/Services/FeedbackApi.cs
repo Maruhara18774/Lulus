@@ -13,6 +13,7 @@ namespace Lulus.CustomerApp.Services
     public class FeedbackApi : IFeedbackApi
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly string MyUrl = "https://lulusbackendapi.azurewebsites.net";
         public FeedbackApi(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -23,7 +24,7 @@ namespace Lulus.CustomerApp.Services
             var httpcontent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("https://localhost:44354");
+            client.BaseAddress = new Uri(MyUrl);
             var respond = await client.PostAsync("/api/Feedback/CreateFeedback", httpcontent);
             var body = await respond.Content.ReadAsStringAsync();
             if (respond.IsSuccessStatusCode)

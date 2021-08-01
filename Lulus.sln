@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.BackendApi", "Lulus.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.ViewModels", "Lulus.ViewModels\Lulus.ViewModels.csproj", "{7EDC9663-35BF-4686-87E8-A2B742B722A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lulus.CustomerApp", "Lulus.CustomerApp\Lulus.CustomerApp.csproj", "{26D12020-9A3F-4B80-88CF-F859180B2D79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lulus.CustomerApp", "Lulus.CustomerApp\Lulus.CustomerApp.csproj", "{26D12020-9A3F-4B80-88CF-F859180B2D79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lulus.UnitTest", "Lulus.UnitTest\Lulus.UnitTest.csproj", "{A8B1F2FF-33DB-454E-B8B9-061C96863A6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{26D12020-9A3F-4B80-88CF-F859180B2D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26D12020-9A3F-4B80-88CF-F859180B2D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26D12020-9A3F-4B80-88CF-F859180B2D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B1F2FF-33DB-454E-B8B9-061C96863A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B1F2FF-33DB-454E-B8B9-061C96863A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B1F2FF-33DB-454E-B8B9-061C96863A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B1F2FF-33DB-454E-B8B9-061C96863A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

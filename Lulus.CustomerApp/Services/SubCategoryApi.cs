@@ -13,6 +13,7 @@ namespace Lulus.CustomerApp.Services
     public class SubCategoryApi : ISubCategoryApi
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly string MyUri = "https://lulusbackendapi.azurewebsites.net";
         public SubCategoryApi(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -23,7 +24,7 @@ namespace Lulus.CustomerApp.Services
             var httpcontent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("https://localhost:44354");
+            client.BaseAddress = new Uri(MyUri);
             var respond = await client.PostAsync("/api/SubCategory/GetList", httpcontent);
             var body = await respond.Content.ReadAsStringAsync();
             if (respond.IsSuccessStatusCode)

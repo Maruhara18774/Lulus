@@ -1,4 +1,4 @@
-const endpoint = 'https://localhost:44354';
+const endpoint = 'https://lulusbackendapi.azurewebsites.net';
 export function ConvertResources(url) {
     return endpoint+url;
 }

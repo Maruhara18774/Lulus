@@ -16,6 +16,7 @@ namespace Lulus.BackendApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly string myUrl = "https://lulusbackendapi.azurewebsites.net";
         public ProductController(IProductService productService)
         {
             _productService = productService;
@@ -28,10 +29,10 @@ namespace Lulus.BackendApi.Controllers
             {
                 foreach (var line in product.ListProductLines)
                 {
-                    line.Texture_Image_Url = "https://localhost:44354"+line.Texture_Image_Url;
+                    line.Texture_Image_Url = myUrl + line.Texture_Image_Url;
                     foreach(var image in line.ListImages)
                     {
-                        image.Image_Url = "https://localhost:44354" + image.Image_Url;
+                        image.Image_Url = myUrl + image.Image_Url;
                     }
                 }
             }
@@ -45,10 +46,10 @@ namespace Lulus.BackendApi.Controllers
             {
                 foreach (var line in product.ListProductLines)
                 {
-                    line.Texture_Image_Url = "https://localhost:44354" + line.Texture_Image_Url;
+                    line.Texture_Image_Url = myUrl + line.Texture_Image_Url;
                     foreach (var image in line.ListImages)
                     {
-                        image.Image_Url = "https://localhost:44354" + image.Image_Url;
+                        image.Image_Url = myUrl + image.Image_Url;
                     }
                 }
             }
@@ -61,10 +62,10 @@ namespace Lulus.BackendApi.Controllers
 
             foreach (var line in result.ListProductLines)
             {
-                line.Texture_Image_Url = "https://localhost:44354" + line.Texture_Image_Url;
+                line.Texture_Image_Url = myUrl + line.Texture_Image_Url;
                 foreach (var image in line.ListImages)
                 {
-                    image.Image_Url = "https://localhost:44354" + image.Image_Url;
+                    image.Image_Url = myUrl + image.Image_Url;
                 }
             }
             return Ok(result);

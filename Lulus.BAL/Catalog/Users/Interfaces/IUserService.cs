@@ -1,4 +1,5 @@
 ﻿
+using Lulus.ViewModels.Common;
 using Lulus.ViewModels.Users;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Lulus.BAL.Catalog.Users.Interfaces
         Task<string> AdminLogin(LoginRequest request);
 
         Task<bool> Register(RegisterRequest request);
+        Task<List<UserViewModel>> GetList(PagingRequestBase request);
     }
 }

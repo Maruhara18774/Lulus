@@ -20,7 +20,7 @@ export class LoginForm extends Component {
             password: value.password,
             rememberMe: value.remember
         }
-        await axios.post('https://localhost:44354/api/User/Authenticate',data).then(
+        await axios.post('https://lulusbackendapi.azurewebsites.net/api/User/Authenticate',data).then(
             response=>{
                 if(response.status === 200){
                     this.props.callback(response.data);

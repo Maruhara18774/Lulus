@@ -1,8 +1,10 @@
 ﻿
 using Lulus.BAL.Catalog.Users.Interfaces;
 using Lulus.Data.Entities;
+using Lulus.ViewModels.Common;
 using Lulus.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -97,6 +99,18 @@ namespace Lulus.BAL.Catalog.Users
                 return true;
             }
             return false;
+        }
+
+        public async Task<List<UserViewModel>> GetList(PagingRequestBase request)
+        {
+            var list = await _userManager.Users.ToListAsync();
+            var data = list.Select(u => new UserViewModel()
+            {
+                ID = u.Id,
+                Name = u.Customer_FirstName + " " + u.Customer_LastName,
+                Phone = u.PhoneNumber
+            }).ToList();
+            return data;
         }
     }
 }

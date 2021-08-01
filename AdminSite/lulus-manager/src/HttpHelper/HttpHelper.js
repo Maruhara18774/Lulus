@@ -1,5 +1,5 @@
 import axios from "axios";
-const endpoint = 'https://localhost:44354/api';
+const endpoint = 'https://lulusbackendapi.azurewebsites.net/api';
 export let currentToken = "";
 let config = {};
 export function SetToken(value) {

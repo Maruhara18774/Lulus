@@ -44,7 +44,7 @@ namespace Lulus.BackendApi
         {
             services.AddDbContext<LulusDBContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("LulusDatabase"))
-            );
+                );
             services.AddIdentity<User,IdentityRole>()
                 .AddEntityFrameworkStores<LulusDBContext>()
                 .AddDefaultTokenProviders();

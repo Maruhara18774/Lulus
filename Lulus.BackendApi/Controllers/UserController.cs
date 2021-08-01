@@ -1,4 +1,5 @@
 ﻿using Lulus.BAL.Catalog.Users.Interfaces;
+using Lulus.ViewModels.Common;
 using Lulus.ViewModels.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -73,6 +74,12 @@ namespace Lulus.BackendApi.Controllers
                 return BadRequest("Login failed.");
             }
             return Ok(resultToken);
+        }
+        [HttpPost("List")]
+        public async Task<IActionResult> GetList(PagingRequestBase request)
+        {
+            var result = await _userService.GetList(request);
+            return Ok(result);
         }
     }
 }
